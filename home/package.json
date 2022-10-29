@@ -17,6 +17,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@react-three/fiber": "8.8.10",
     "clsx": "1.2.1",
     "concurrently": "7.5.0",
     "next": "latest",
@@ -24,6 +25,7 @@
     "react-dom": "18.2.0",
     "styled-components": "6.0.0-beta.2",
     "styled-jsx": "5.1.0",
+    "three": "0.146.0",
     "use-count-up": "3.0.1"
   },
   "devDependencies": {
