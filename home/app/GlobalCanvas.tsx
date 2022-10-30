@@ -19,8 +19,8 @@ function Mesh() {
                     onPointerOver={() => setIsHovered(true)}
                     onPointerOut={() => setIsHovered(false)}
                 >
-                    <boxBufferGeometry args={isHovered ? [1.2, 1.2, 1.2] : [1, 1, 1]} />
-                    <meshLambertMaterial color={isHovered ? 0x44c2b5 : 0x9178e6} />
+                    <torusBufferGeometry args={isHovered ? [2, 1, 20, 50] : [1.5, 0.75, 20, 50]} />
+                    <meshLambertMaterial color={isHovered ? 0x44c2b5 : 0x0078e6} />
                 </mesh>
 
        );
@@ -30,7 +30,7 @@ function Mesh() {
 export default function GlobalCanvas() {
     return (
         <>
-            <Canvas dpr={2}>
+            <Canvas dpr={2} shadows={true}>
                 <color attach="background" args={[0xf5f3fd]} />
                 <ambientLight intensity={0.5} />
                 <directionalLight intensity={0.5} position={[-10, 10, 10]} />
