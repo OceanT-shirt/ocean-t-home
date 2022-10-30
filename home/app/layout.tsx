@@ -16,7 +16,7 @@ export default function RootLayout({
       </head>
       <body className="overflow-y-scroll bg-zinc-900">
         <div className="grid grid-cols-[1fr,minmax(auto,240px),min(800px,100%),1fr] gap-x-8 py-8">
-          <div className="col-start-2 col-end-4 mb-10">
+          <div className="col-start-2 col-end-4 mb-10 h-96">
             <GlobalCanvas />
           </div>
           <div className="col-start-2">
