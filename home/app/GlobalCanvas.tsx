@@ -2,8 +2,8 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three'
-import { useRef, useState} from "react";
-import Image from 'next/image';
+import {useEffect, useRef, useState} from "react";
+import ReactPlayer from 'react-player';
 
 function Mesh() {
    const ref = useRef<THREE.Mesh>(null!);
@@ -31,16 +31,19 @@ function InfoDisplay() {
     const ref = useRef<THREE.Mesh>(null!);
     const [isHovered, setIsHovered] = useState(false);
     const [isRotationReverse, setIsRotationReverse] = useState(false);
-    const [video] = useState(() => Object.assign(<Image alt={"hoge"} src={"./q-zip.png"} /> ))
+    let speed = 0
+    const [video] = useState(() => Object.assign(document.createElement('video'), {src: "./Summer_Forest.mp4", loop: true}))
+    useEffect(() => void video.play(), [video])
     useFrame(() => {
         if (ref.current && !isHovered) {
-            if (ref.current.rotation.y == Math.PI/2) setIsRotationReverse(true)
-            if (ref.current.rotation.y == Math.PI*-1/2) setIsRotationReverse(false)
+            if (ref.current.rotation.y > Math.PI/3) setIsRotationReverse(true);
+            if (ref.current.rotation.y < Math.PI*-1/3) setIsRotationReverse(false);
             if(isRotationReverse) {
-                ref.current.rotation.y += 0.01
+                speed -= 0.00005
             } else {
-                ref.current.rotation.y -= 0.01
+                speed += 0.00005
             }
+            ref.current.rotation.y += speed
         }
     })
 
