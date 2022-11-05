@@ -30,20 +30,11 @@ function Mesh() {
 function InfoDisplay() {
     const ref = useRef<THREE.Mesh>(null!);
     const [isHovered, setIsHovered] = useState(false);
-    const [isRotationReverse, setIsRotationReverse] = useState(false);
-    let speed = 0
     const [video] = useState(() => Object.assign(document.createElement('video'), {src: "./Summer_Forest.mp4", loop: true}))
     useEffect(() => void video.play(), [video])
-    useFrame(() => {
+    useFrame((state) => {
         if (ref.current && !isHovered) {
-            if (ref.current.rotation.y > Math.PI/3) setIsRotationReverse(true);
-            if (ref.current.rotation.y < Math.PI*-1/3) setIsRotationReverse(false);
-            if(isRotationReverse) {
-                speed -= 0.00005
-            } else {
-                speed += 0.00005
-            }
-            ref.current.rotation.y += speed
+            ref.current.rotation.y = Math.PI * Math.sin(state.clock.getElapsedTime()/2)*2/5
         }
     })
 
