@@ -3,6 +3,8 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three'
 import {useEffect, useRef, useState} from "react";
+// import {Effects} from "./Effect";
+// import {RoundedBox} from "@react-three/drei";
 
 
 function InfoDisplay() {
@@ -34,14 +36,25 @@ function InfoDisplay() {
     );
 }
 
+const Plane = ({ color }: {color: string}) => (
+    <mesh
+        position={[0, -2.5, 0]}
+    >
+        <boxGeometry args={[12, .2, 2]} />
+        <meshStandardMaterial color={color} envMapIntensity={0.5} roughness={0} metalness={0} />
+    </mesh>
+)
+
 export default function GlobalCanvas() {
     return (
         <>
             <Canvas dpr={2} shadows={true}>
-                <color attach="background" args={[0x383838]} />
-                {/*<ambientLight intensity={0.5} />*/}
+                <color attach="background" args={[0x111111]} />
+                <ambientLight intensity={0.02} />
                 {/*<directionalLight intensity={0.5} position={[-10, 10, 10]} />*/}
+                <Plane color={'white'} />
                 <InfoDisplay />
+                {/*<Effects />*/}
             </Canvas>
         </>
     );
