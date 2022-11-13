@@ -1,0 +1,6 @@
+version: "1"
+sql:
+    - engine: "postgresql"
+      queries: "./db/query/"
+      schema: "./db/migration/"
+      path: "./db/sqlc"
