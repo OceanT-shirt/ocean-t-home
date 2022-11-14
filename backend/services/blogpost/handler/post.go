@@ -2,6 +2,10 @@ package handler
 
 import "net/http"
 
-func PostBlog(writer http.ResponseWriter, request *http.Request) {
+func handlePost(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func postBlog(writer http.ResponseWriter, request *http.Request) {
 
 }
