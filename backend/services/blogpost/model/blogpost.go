@@ -14,18 +14,14 @@ type BlogPost struct {
 	Contents string `gorm:"not null" json:"contents"`
 }
 
-//func GetAll(db *gorm.DB) ([]BlogPost, error) {
-//	tx := db.Find(&BlogPost{})
-//	if err := tx.Error; err == nil {
-//		return tx, nil
-//	} else {
-//		log.Error().Msgf("Database Error: %v", err)
-//		return nil, err
-//	}
-//}
-
 func GetOne(db *gorm.DB) *BlogPost {
 	result := &BlogPost{}
 	db.First(&result)
+	return result
+}
+
+func GetAll(db *gorm.DB) *[]BlogPost {
+	result := &[]BlogPost{}
+	db.Find(&result)
 	return result
 }
