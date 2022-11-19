@@ -3,11 +3,12 @@ package handler
 import (
 	"encoding/json"
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
+	"github.com/julienschmidt/httprouter"
 	"github.com/rs/zerolog/log"
 	"net/http"
 )
 
-func (h Handler) getAllBlog(w http.ResponseWriter, r *http.Request) (err error) {
+func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) (err error) {
 	data := model.GetAll(h.gormdb)
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
@@ -19,8 +20,8 @@ func (h Handler) getAllBlog(w http.ResponseWriter, r *http.Request) (err error) 
 	return
 }
 
-func (h Handler) getOneBlog(w http.ResponseWriter, r *http.Request) (err error) {
-	data := model.GetOne(h.gormdb)
+func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) (err error) {
+	data := model.GetOne(h.gormdb, p.ByName("id"))
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
 		log.Error().Msgf("Get Blog Error: %v", err)

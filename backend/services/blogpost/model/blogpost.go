@@ -14,9 +14,9 @@ type BlogPost struct {
 	Contents string `gorm:"not null" json:"contents"`
 }
 
-func GetOne(db *gorm.DB) *BlogPost {
+func GetOne(db *gorm.DB, id string) *BlogPost {
 	result := &BlogPost{}
-	db.First(&result)
+	db.Where("ID = ?", id).First(&result)
 	return result
 }
 

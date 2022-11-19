@@ -8,13 +8,11 @@ import (
 
 func (h Handler) HandleRequest(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var err error
-	log.Info().Msgf("%v", p.ByName("id"))
-	if p.ByName("id") == "/" {
-		log.Info().Msg("Now getting all posts")
-		err = h.getAllBlog(w, r)
+	id := p.ByName("id")
+	if id == "/" {
+		err = h.getAllBlog(w, r, p)
 	} else {
-		log.Info().Msg("Now getting one post")
-		err = h.getOneBlog(w, r)
+		err = h.getOneBlog(w, r, p)
 	}
 	if err != nil {
 		log.Fatal().Msgf("Http Server Error: %v", err)
