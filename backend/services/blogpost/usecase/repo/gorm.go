@@ -16,17 +16,20 @@ func New(db *gorm.DB) *GormRepo {
 	}
 }
 
-// GetOne TODO add error handling
-func (b GormRepo) GetOne(id string) *model.BlogPost {
+func (b GormRepo) GetOne(id string) (*model.BlogPost, error) {
 	result := &model.BlogPost{}
-	b.db.Where("ID = ?", id).First(&result)
-	return result
+	if err := b.db.Where("ID = ?", id).First(&result).Error; err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
-func (b GormRepo) GetAll() *[]model.BlogPost {
+func (b GormRepo) GetAll() (*[]model.BlogPost, error) {
 	result := &[]model.BlogPost{}
-	b.db.Find(&result)
-	return result
+	if err := b.db.Find(&result).Error; err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 func (b GormRepo) Post(data *model.BlogPost) (id uint, err error) {
@@ -40,14 +43,20 @@ func (b GormRepo) Post(data *model.BlogPost) (id uint, err error) {
 	}
 }
 
-func (b GormRepo) Update(id string, datanew *model.BlogPost) {
+func (b GormRepo) Update(id string, datanew *model.BlogPost) error {
 	data := &model.BlogPost{}
-	b.db.Where("ID = ?", id).First(&data)
-	b.db.Model(&data).Updates(&datanew)
-	return
+	if err := b.db.Where("ID = ?", id).First(&data).Error; err != nil {
+		return err
+	}
+	if err := b.db.Model(&data).Updates(&datanew).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
-func (b GormRepo) Delete(id string) {
-	b.db.Delete(&model.BlogPost{}, id)
-	return
+func (b GormRepo) Delete(id string) error {
+	if err := b.db.Delete(&model.BlogPost{}, id).Error; err != nil {
+		return err
+	}
+	return nil
 }

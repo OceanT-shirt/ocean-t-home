@@ -11,7 +11,7 @@ import (
 
 type BlogPostUseCase struct {
 	repo        *repo.GormRepo // db repository
-	presenter BlogPost // presenter
+	// presenter BlogPost // presenter
 }
 
 type BlogPostInteractor interface {
@@ -25,7 +25,7 @@ type BlogPostInteractor interface {
 func New(db *gorm.DB) *BlogPostUseCase {
 	return &BlogPostUseCase{
 		repo:        repo.New(db),
-		presenter: nil
+		// presenter: nil
 	}
 }
 
