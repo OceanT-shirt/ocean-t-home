@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/rs/zerolog/log"
 	"gorm.io/gorm"
 )
 
@@ -24,4 +25,15 @@ func GetAll(db *gorm.DB) *[]BlogPost {
 	result := &[]BlogPost{}
 	db.Find(&result)
 	return result
+}
+
+func Post(db *gorm.DB, data *BlogPost) (id uint, err error) {
+	result := db.Create(&data)
+	err = result.Error
+	if err != nil {
+		log.Error().Msgf("database creation error: %v", err)
+		return 0, err
+	} else {
+		return data.ID, nil
+	}
 }

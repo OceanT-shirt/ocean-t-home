@@ -22,11 +22,14 @@ func main() {
 		log.Fatal().Msgf("Migration Error: %v", err)
 	}
 
+	// TODO refactor router
 	h := handler.New(db)
 	mux := httprouter.New()
 	mux.GET("/", h.Hello)
-	mux.GET("/posts/", h.HandleRequest)
-	mux.GET("/posts/:id", h.HandleRequest)
+	//mux.GET("/posts/", h.HandleRequest)
+	mux.GET("/posts/*id", h.HandleRequest)
+	mux.POST("/posts/", h.PostBlog)
+	mux.PUT("/posts/", h.)
 
 	port := os.Getenv("PORT")
 	log.Info().Msgf("Now listening on port %v", port)
