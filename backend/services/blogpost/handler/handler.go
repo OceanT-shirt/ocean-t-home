@@ -1,9 +1,12 @@
 package handler
 
+// Controller
+
 import (
 	"encoding/json"
 	"fmt"
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
+	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/usecase"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/zerolog/log"
 	"gorm.io/gorm"
@@ -14,21 +17,31 @@ type Handler struct {
 	gormdb *gorm.DB
 }
 
-func New(db *gorm.DB) (h *Handler) {
-	h = &Handler{
+type HandlerNew struct {
+	uc usecase.BlogPostUseCase
+}
+
+func New(db *gorm.DB) *Handler {
+	h := &Handler{
 		gormdb: db,
 	}
-	return
+	return h
 }
 
 // Hello これはハンドラの例
-func (h Handler) Hello(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (h Handler) hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 	if _, err := fmt.Fprintln(w, "Hello, World!"); err != nil {
 		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
 	}
 }
 
-func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) (err error) {
+func (h HandlerNew) hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
+	if _, err := h.uc.GetAll(); err != nil {
+		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
+	}
+}
+
+func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 	data := model.GetAll(h.gormdb)
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
@@ -40,7 +53,7 @@ func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter
 	return
 }
 
-func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) (err error) {
+func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
 	data := model.GetOne(h.gormdb, p.ByName("id")[1:])
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
@@ -53,7 +66,7 @@ func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter
 	return
 }
 
-func (h Handler) PostBlog(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (h Handler) postBlog(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var data model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		log.Error().Msgf("json parsing error: &v", err)
@@ -70,7 +83,7 @@ func (h Handler) PostBlog(w http.ResponseWriter, r *http.Request, _ httprouter.P
 	return
 }
 
-func (h Handler) UpdateBlog(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func (h Handler) updateBlog(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id := p.ByName("id")
 	var data model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
@@ -82,7 +95,7 @@ func (h Handler) UpdateBlog(w http.ResponseWriter, r *http.Request, p httprouter
 	return
 }
 
-func (h Handler) DeleteBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
+func (h Handler) deleteBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
 	id := p.ByName("id")
 	model.Delete(h.gormdb, id)
 	return
