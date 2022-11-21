@@ -53,18 +53,8 @@ func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter
 	return
 }
 
-func (h Handler) PostBlog(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	//l := r.ContentLength
-	//body := make([]byte, l)
-	//if _, err := r.Body.Read(body); err != nil {
-	//	log.Error().Msgf("body making error: &v", err)
-	//	return
-	//}
+func (h Handler) PostBlog(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var data model.BlogPost
-	//if err := json.Unmarshal(body, &data); err != nil {
-	//	log.Error().Msgf("json parsing error: &v", err)
-	//	return
-	//}
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		log.Error().Msgf("json parsing error: &v", err)
 		return
@@ -77,5 +67,23 @@ func (h Handler) PostBlog(w http.ResponseWriter, r *http.Request, p httprouter.P
 		log.Info().Msgf("blogpost created: %v", id)
 	}
 	w.WriteHeader(200)
+	return
+}
+
+func (h Handler) UpdateBlog(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id := p.ByName("id")
+	var data model.BlogPost
+	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
+		log.Error().Msgf("json parsing error: &v", err)
+		return
+	}
+	model.Update(h.gormdb, id, &data)
+	w.WriteHeader(200)
+	return
+}
+
+func (h Handler) DeleteBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
+	id := p.ByName("id")
+	model.Delete(h.gormdb, id)
 	return
 }

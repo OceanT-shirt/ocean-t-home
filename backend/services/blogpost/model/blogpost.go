@@ -8,10 +8,8 @@ import (
 // BlogPost CreatedAtなどはGormが管理してくれるらしい
 type BlogPost struct {
 	gorm.Model
-	ID    uint   `gorm:"primary_key" json:"id"`
-	Title string `gorm:"not null" json:"title"`
-	//CreatedAt    time.Time `gorm:"not null"`
-	//LastEditedAt time.Time
+	ID       uint   `gorm:"primary_key" json:"id"`
+	Title    string `gorm:"not null" json:"title"`
 	Contents string `gorm:"not null" json:"contents"`
 }
 
@@ -36,4 +34,16 @@ func Post(db *gorm.DB, data *BlogPost) (id uint, err error) {
 	} else {
 		return data.ID, nil
 	}
+}
+
+func Update(db *gorm.DB, id string, datanew *BlogPost) {
+	data := &BlogPost{}
+	db.Where("ID = ?", id).First(&data)
+	db.Model(&data).Updates(&datanew)
+	return
+}
+
+func Delete(db *gorm.DB, id string) {
+	db.Delete(&BlogPost{}, id)
+	return
 }

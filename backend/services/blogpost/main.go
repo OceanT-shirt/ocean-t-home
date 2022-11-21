@@ -29,7 +29,8 @@ func main() {
 	//mux.GET("/posts/", h.HandleRequest)
 	mux.GET("/posts/*id", h.HandleRequest)
 	mux.POST("/posts/", h.PostBlog)
-	mux.PUT("/posts/", h.)
+	mux.PUT("/posts/:id", h.UpdateBlog)
+	mux.DELETE("/posts/:id", h.DeleteBlog)
 
 	port := os.Getenv("PORT")
 	log.Info().Msgf("Now listening on port %v", port)

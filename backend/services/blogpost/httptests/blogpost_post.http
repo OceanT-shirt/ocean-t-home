@@ -7,3 +7,17 @@ Content-Type: application/json
 }
 
 ###
+PUT http://localhost:8081/posts/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "title": "ブログを開設しました！やったね！",
+  "contents": "これからよろしくお願いします！"
+}
+
+###
+DELETE http://localhost:8081/posts/1
+Content-Type: application/json
+
+{}
