@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/handler"
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
-	"github.com/julienschmidt/httprouter"
 	"github.com/rs/zerolog/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,19 +21,11 @@ func main() {
 		log.Fatal().Msgf("Migration Error: %v", err)
 	}
 
-	// TODO refactor router
-	h := handler.New(db)
-	mux := httprouter.New()
-	mux.GET("/", h.Hello)
-	//mux.GET("/posts/", h.HandleRequest)
-	mux.GET("/posts/*id", h.HandleRequest)
-	mux.POST("/posts/", h.PostBlog)
-	mux.PUT("/posts/:id", h.UpdateBlog)
-	mux.DELETE("/posts/:id", h.DeleteBlog)
+	router := handler.NewRouter(db)
 
 	port := os.Getenv("PORT")
 	log.Info().Msgf("Now listening on port %v", port)
-	if err := http.ListenAndServe(fmt.Sprintf(":%s", port), mux); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", port), router); err != nil {
 		log.Fatal().Msgf("Http Server Error: %v", err)
 	}
 }

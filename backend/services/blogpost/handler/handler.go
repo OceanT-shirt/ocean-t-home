@@ -28,7 +28,7 @@ func (h Handler) Hello(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	}
 }
 
-func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) (err error) {
+func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) (err error) {
 	data := model.GetAll(h.gormdb)
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
