@@ -5,22 +5,32 @@ package usecase
 
 import (
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
+	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/usecase/repo"
 	"gorm.io/gorm"
 )
 
 type BlogPostUseCase struct {
-	db       *gorm.DB
-	blogpost BlogPost
+	repo        *repo.GormRepo // db repository
+	presenter BlogPost // presenter
+}
+
+type BlogPostInteractor interface {
+	GetOne(id string) (model.BlogPost, error)
+	GetAll() ([]model.BlogPost, error)
+	Post(post model.BlogPost) error
+	Update(id string, newdata model.BlogPost) error
+	Delete(id string) error
 }
 
 func New(db *gorm.DB) *BlogPostUseCase {
 	return &BlogPostUseCase{
-		db:       db,
-		blogpost: nil,
+		repo:        repo.New(db),
+		presenter: nil
 	}
 }
 
-func (uc *BlogPostUseCase) GetOne(id string) (model.BlogPost, error) {
+func (uc *BlogPostUseCase) GetOne(id string) (*model.BlogPost, error) {
+	data, err := uc.
 	return model.BlogPost{}, nil
 }
 
