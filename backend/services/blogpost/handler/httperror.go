@@ -1,13 +1,23 @@
 package handler
 
-import "net/http"
+import (
+	"github.com/rs/zerolog/log"
+	"net/http"
+)
 
-type HttpError struct {
-	code    string
-	message string
+func NewHttpError(w http.ResponseWriter, err error) {
+	if err == nil {
+		return
+	}
+	log.Error().Msgf("http server error: %v", err)
+	emitError(w, err)
+	return
 }
 
-func (h HttpError) EmitError(w http.ResponseWriter) {
-	http.Error(w, h.code, http.StatusInternalServerError)
+func emitError(w http.ResponseWriter, err error) {
+	if err == nil {
+		return
+	}
+	http.Error(w, err.Error(), http.StatusInternalServerError)
 	return
 }
