@@ -14,16 +14,12 @@ import (
 )
 
 type Handler struct {
-	gormdb *gorm.DB
-}
-
-type HandlerNew struct {
-	uc usecase.BlogPostInteractor
+	uc *usecase.BlogPostUseCase
 }
 
 func New(db *gorm.DB) *Handler {
 	h := &Handler{
-		gormdb: db,
+		uc: usecase.New(db),
 	}
 	return h
 }
@@ -35,14 +31,8 @@ func (h Handler) hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Para
 	}
 }
 
-func (h HandlerNew) hello(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	if _, err := h.uc.GetAll(); err != nil {
-		http.Error(w, fmt.Sprintf("%s", err), http.StatusInternalServerError)
-	}
-}
-
 func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	data := model.GetAll(h.gormdb)
+	data, err := h.uc.GetAll()
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
 		log.Error().Msgf("Get Blog Error: %v", err)
@@ -54,7 +44,7 @@ func (h Handler) getAllBlog(w http.ResponseWriter, _ *http.Request, _ httprouter
 }
 
 func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
-	data := model.GetOne(h.gormdb, p.ByName("id")[1:])
+	data, err := h.uc.GetOne(p.ByName("id"))
 	output, err := json.MarshalIndent(data, "", "\t\t")
 	if err != nil {
 		log.Error().Msgf("Get Blog Error: %v", err)
@@ -67,36 +57,42 @@ func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter
 }
 
 func (h Handler) postBlog(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	var data model.BlogPost
+	var data *model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		log.Error().Msgf("json parsing error: &v", err)
 		return
 	}
-	id, err := model.Post(h.gormdb, &data)
+	err := h.uc.Post(data)
 	if err != nil {
 		log.Error().Msgf("database post error: &v", err)
 		return
 	} else {
-		log.Info().Msgf("blogpost created: %v", id)
+		w.WriteHeader(200)
 	}
-	w.WriteHeader(200)
 	return
 }
 
 func (h Handler) updateBlog(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id := p.ByName("id")
-	var data model.BlogPost
+	var data *model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		log.Error().Msgf("json parsing error: &v", err)
 		return
 	}
-	model.Update(h.gormdb, id, &data)
-	w.WriteHeader(200)
+	if err := h.uc.Update(id, data); err != nil {
+
+	} else {
+		w.WriteHeader(200)
+	}
 	return
 }
 
 func (h Handler) deleteBlog(w http.ResponseWriter, _ *http.Request, p httprouter.Params) {
 	id := p.ByName("id")
-	model.Delete(h.gormdb, id)
+	if err := h.uc.Delete(id); err != nil {
+
+	} else {
+		w.WriteHeader(200)
+	}
 	return
 }

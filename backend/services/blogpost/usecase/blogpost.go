@@ -1,16 +1,17 @@
 package usecase
 
-// Interactors
-// Use Caseインターフェースの実装
-
 import (
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
 	"github.com/OceanT-shirt/ocean-t-home/services/blogpost/usecase/repo"
 	"gorm.io/gorm"
 )
 
+// Interactors
+// Use Caseインターフェースの実装
+// ここのメソッドにControllerから直接アクセスする
+
 type BlogPostUseCase struct {
-	repo GormRepo // db repository
+	repo Repo // db repository
 	// presenter BlogPost // presenter
 }
 

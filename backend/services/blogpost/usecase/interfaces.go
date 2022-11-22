@@ -7,14 +7,9 @@ import "github.com/OceanT-shirt/ocean-t-home/services/blogpost/model"
 // model (Domain層) を呼び出す
 
 type (
-	//BlogPostInteractor interface {
-	//	GetOne(id string) (model.BlogPost, error)
-	//	GetAll() ([]model.BlogPost, error)
-	//	Post(post model.BlogPost) error
-	//	Update(id string, newdata model.BlogPost) error
-	//	Delete(id string) error
-	//}
-	GormRepo interface {
+	// Repo データベースにアクセスするクラスを抽象化することで、
+	// データベースやORMに依存しない設計にすることができる
+	Repo interface {
 		GetOne(id string) (*model.BlogPost, error)
 		GetAll() (*[]model.BlogPost, error)
 		Post(data *model.BlogPost) (uint, error)
