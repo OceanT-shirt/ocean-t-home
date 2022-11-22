@@ -18,7 +18,7 @@ type Handler struct {
 }
 
 type HandlerNew struct {
-	uc usecase.BlogPostUseCase
+	uc usecase.BlogPostInteractor
 }
 
 func New(db *gorm.DB) *Handler {

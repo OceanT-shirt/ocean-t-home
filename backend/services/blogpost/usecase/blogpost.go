@@ -10,42 +10,40 @@ import (
 )
 
 type BlogPostUseCase struct {
-	repo        *repo.GormRepo // db repository
+	repo GormRepo // db repository
 	// presenter BlogPost // presenter
 }
 
-type BlogPostInteractor interface {
-	GetOne(id string) (model.BlogPost, error)
-	GetAll() ([]model.BlogPost, error)
-	Post(post model.BlogPost) error
-	Update(id string, newdata model.BlogPost) error
-	Delete(id string) error
-}
+// TODO add presenter
 
 func New(db *gorm.DB) *BlogPostUseCase {
 	return &BlogPostUseCase{
-		repo:        repo.New(db),
+		repo: repo.New(db),
 		// presenter: nil
 	}
 }
 
 func (uc *BlogPostUseCase) GetOne(id string) (*model.BlogPost, error) {
-	data, err := uc.
-	return model.BlogPost{}, nil
+	data, err := uc.repo.GetOne(id)
+	return data, err
 }
 
-func (uc *BlogPostUseCase) GetAll() ([]model.BlogPost, error) {
-	return nil, nil
+func (uc *BlogPostUseCase) GetAll() (*[]model.BlogPost, error) {
+	data, err := uc.repo.GetAll()
+	return data, err
 }
 
-func (uc *BlogPostUseCase) Post(post model.BlogPost) error {
-	return nil
+func (uc *BlogPostUseCase) Post(post *model.BlogPost) error {
+	_, err := uc.repo.Post(post)
+	return err
 }
 
-func (uc *BlogPostUseCase) Update(id string, newdata model.BlogPost) error {
-	return nil
+func (uc *BlogPostUseCase) Update(id string, newdata *model.BlogPost) error {
+	err := uc.repo.Update(id, newdata)
+	return err
 }
 
 func (uc *BlogPostUseCase) Delete(id string) error {
-	return nil
+	err := uc.repo.Delete(id)
+	return err
 }
