@@ -24,6 +24,12 @@ func New(db *gorm.DB) *BlogPostUseCase {
 	}
 }
 
+func NewMock(repo Repo) *BlogPostUseCase {
+	return &BlogPostUseCase{
+		repo: repo,
+	}
+}
+
 func (uc *BlogPostUseCase) GetOne(id string) (*model.BlogPost, error) {
 	data, err := uc.repo.GetOne(id)
 	return data, err

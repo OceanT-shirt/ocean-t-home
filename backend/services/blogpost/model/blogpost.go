@@ -9,3 +9,10 @@ type BlogPost struct {
 	Title      string `gorm:"not null" json:"title"`
 	Contents   string `gorm:"not null" json:"contents"`
 }
+
+func CreateBlogPost(title string, contents string) BlogPost {
+	return BlogPost{
+		Title:    title,
+		Contents: contents,
+	}
+}
