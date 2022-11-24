@@ -2,18 +2,20 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import {BiCircle} from "react-icons/all";
 
 const HeadContainer = styled.header`
   position: relative;
   height: 64px;
   align-items: center;
-  padding: 0px 8px;
-  margin-bottom: 48px;
+  justify-self: center;
   display: flex;
   border: 0 solid #e5e7eb;
   color: rgb(244 244 245);
+  background-color: #FF0080;
   grid-column-start: 2;
   grid-column-end: 4;
+  flex-grow: 1;
 `;
 
 const Title = styled.span`
@@ -37,8 +39,7 @@ const NextJsLogo = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Header() {
   return (
     <HeadContainer>
-      <NextJsLogo height={40} fill={`rgb(244 244 245)`} />
-      <Title>The React Framework</Title>
+      <BiCircle color={"#2f2beb"} size={"60"} />
     </HeadContainer>
   );
 }
