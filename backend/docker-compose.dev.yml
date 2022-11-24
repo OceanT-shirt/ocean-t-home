@@ -1,0 +1,43 @@
+version: '1'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: homepage-blogpost-postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: blogpost
+      TZ: "Asia/Tokyo"
+    networks:
+      - blogpost
+  adminer:
+    depends_on:
+      - postgres
+    container_name: homepage-blogpost-adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - blogpost
+  blogpost:
+    depends_on:
+      - postgres
+    container_name: homepage-blogpost
+    build:
+      context: ./services/blogpost
+      dockerfile: Dockerfile
+    env_file:
+      - services/blogpost/env/.local.env
+    networks:
+      - blogpost
+    ports:
+      - 8080:8080
+
+networks:
+  blogpost:
+    driver: bridge
+
+
