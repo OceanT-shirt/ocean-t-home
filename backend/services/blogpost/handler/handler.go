@@ -59,12 +59,12 @@ func (h Handler) getOneBlog(w http.ResponseWriter, _ *http.Request, p httprouter
 func (h Handler) postBlog(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var data *model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
-		log.Error().Msgf("json parsing error: &v", err)
+		log.Error().Msgf("json parsing error: %v", err)
 		return
 	}
 	err := h.uc.Post(data)
 	if err != nil {
-		log.Error().Msgf("database post error: &v", err)
+		log.Error().Msgf("database post error: %v", err)
 		NewHttpError(w, err)
 		return
 	} else {
@@ -77,7 +77,7 @@ func (h Handler) updateBlog(w http.ResponseWriter, r *http.Request, p httprouter
 	id := p.ByName("id")
 	var data *model.BlogPost
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
-		log.Error().Msgf("json parsing error: &v", err)
+		log.Error().Msgf("json parsing error: %v", err)
 		NewHttpError(w, err)
 		return
 	}

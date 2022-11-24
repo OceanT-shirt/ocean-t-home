@@ -13,9 +13,10 @@ func NewRouter(db *gorm.DB) *httprouter.Router {
 	mux.GET("/", h.hello)
 	mux.GET("/posts/", h.getAllBlog)
 	mux.GET("/posts/:id", h.getOneBlog)
-	mux.POST("/posts/", h.postBlog)
-	mux.PUT("/posts/:id", h.updateBlog)
-	mux.DELETE("/posts/:id", h.deleteBlog)
+	mux.POST("/protected/posts/", Auth(h.postBlog))
+	mux.PUT("/protected/posts/:id", Auth(h.updateBlog))
+	mux.DELETE("/protected/posts/:id", Auth(h.deleteBlog))
+	mux.GET("/protected/", Auth(h.getAllBlog))
 
 	return mux
 }
