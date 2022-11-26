@@ -28,7 +28,7 @@ export function Ocean() {
         [waterNormals]
     )
     // @ts-ignore
-    useFrame((state, delta) => (ref.current.material.uniforms.time.value += delta))
+    useFrame((state, delta) => (ref.current.material.uniforms.time.value += delta/2))
     // @ts-ignore
     return <Suspense fallback={null}><water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} /></Suspense>;
 }
