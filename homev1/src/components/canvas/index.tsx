@@ -9,7 +9,8 @@ import {Button3D} from "./button3D";
 import {Ground} from "./ground";
 import {GetPortfolioMock, Portfolio} from "../../models/portfolio";
 import {CameraControl} from "./cameraControl";
-import { PortfolioBoard } from "./portfolioBoard";
+import { PortfolioBoards} from "./portfolioBoard";
+import * as THREE from "three"
 
 
 
@@ -18,24 +19,23 @@ export const MainCanvas = () => {
 
 
     return (
-        <Canvas camera={{fov: 70, near: 1, far: 2000}}>
+        <Canvas camera={{position: [0, 100, 30], fov: 70, near: 1, far: 2000}}>
             {/*<hemisphereLight color={"#0000ff"} groundColor={"#00ff00"} intensity={0.6} />*/}
             <color attach="background" args={[0xefefef]} />
             <ambientLight intensity={0.02} />
             <directionalLight intensity={0.5} position={[-10, 100, 10]} />
             <PortfolioWall color={'skyblue'} position={[0, 110, 15]} />
-            {/*<PortfolioWall color={'skyblue'} position={[0, 5, 0]} />*/}
             {/*<InfoDisplay />*/}
             <WindowFrame color={'gray'} position={[0, 89, 0]} />
             <WindowFrame color={'gray'} position={[0, 110, 0]} />
             <Ocean />
             <Sky rayleigh={6} turbidity={6} distance={3000} mieDirectionalG={0.8} mieCoefficient={0.005} inclination={0.49} azimuth={0.25} />
             <Button3D color={"skyblue"} position={[0, 98, 3]} />
-            <PortfolioBoard id={0} imageUri={p[0].imgUri} desc={p[0].desc} pos={[0, 100, 0]} homePos={[0, 110, 15]} />
+            <PortfolioBoards portfolios={p} homePos={new THREE.Vector3(0, 100, 5)} />
             <Ground pos={[0, 90, 20]} />
             <Ground pos={[0, 110, 20]} />
             {/*<Effects />*/}
-            <CameraControl />
+            {/*<CameraControl />*/}
         </Canvas>
     )
 }
