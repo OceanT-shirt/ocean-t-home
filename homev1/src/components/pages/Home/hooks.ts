@@ -1,4 +1,6 @@
+import {UserMock} from "../../../models/user";
+
 export const useHome = () => {
-    const hoge = 1;
-    return { hoge };
+    const user = UserMock;
+    return { user };
 }

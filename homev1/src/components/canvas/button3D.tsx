@@ -1,21 +1,17 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useCursor} from "@react-three/drei";
-import {useFrame} from "@react-three/fiber";
-import * as THREE from 'three'
+import {CanvasContext} from "../../providers/CanvasProvider";
 
 export const Button3D = ({ color, position }: {color: string, position: [number, number, number]}) => {
     const [active, setActive] = useState<boolean>(false)
-    const [portfolio, setPortfolio] = useState<boolean>(true)
+    const {route, setRoute} = useContext(CanvasContext)
 
     useCursor(active)
-    useFrame((state) => {
-        state.camera.position.lerp(new THREE.Vector3(0, 100, portfolio ? 10 : 30 ), 0.03)
-    })
 
     return(
         <mesh
             position={position}
-            onClick={() => setPortfolio(!portfolio)}
+            onClick={() => setRoute(route === "PORTFOLIO" ? "HOME" : "PORTFOLIO")}
             onPointerOver={() => setActive(true)}
             onPointerOut={() => setActive(false)}
         >

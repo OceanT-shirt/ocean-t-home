@@ -5,13 +5,19 @@ import {FontType} from "../../../constants/Font";
 import {Color} from "../../../constants/Color";
 
 const StyledFooter = styled.div`
-    ${tw`flex-grow flex py-5 bg-gray-800 justify-center`}
+    ${tw`flex-grow flex flex-col bg-gray-800 justify-center items-center`}
 `
 
-export const Footer = () => {
+interface FooterProps {
+    userId: string;
+    userName: string;
+}
+
+export const Footer = ({userName, userId}: FooterProps) => {
     return (
         <StyledFooter>
-            <Text fontType={FontType.TITLE1} color={Color.WHITE}>Haruka Takahira</Text>
+            <Text fontType={FontType.SUB} color={Color.WHITE}>{userId}</Text>
+            <Text fontType={FontType.TITLE1} color={Color.WHITE}>{userName}</Text>
         </StyledFooter>
     )
 }
