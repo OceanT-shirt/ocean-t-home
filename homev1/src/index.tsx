@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
-import {CanvasProvider} from "./providers/CanvasProvider";
+import {CameraPosProvider} from "./providers/CameraPosProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-      <CanvasProvider>
+      <CameraPosProvider>
           <App />
-      </CanvasProvider>
+      </CameraPosProvider>
   </React.StrictMode>
 );
 

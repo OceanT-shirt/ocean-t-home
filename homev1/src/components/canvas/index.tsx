@@ -31,7 +31,7 @@ export const MainCanvas = () => {
             <Ocean />
             <Sky rayleigh={6} turbidity={6} distance={3000} mieDirectionalG={0.8} mieCoefficient={0.005} inclination={0.49} azimuth={0.25} />
             <Button3D color={"skyblue"} position={[0, 98, 3]} />
-            <PortfolioBoards portfolios={p} homePos={new THREE.Vector3(0, 100, 5)} />
+            <PortfolioBoards portfolios={p} homePos={new THREE.Vector3(0, 100, 40)} />
             <Ground pos={[0, 90, 20]} />
             <Ground pos={[0, 110, 20]} />
             {/*<Effects />*/}

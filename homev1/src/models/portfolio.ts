@@ -15,6 +15,6 @@ export const GetPortfolioMock = (_id: number): Portfolio => {
         imgUri: "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         title: "Sample Portfolio",
         desc: "This is 3D portfolio created by @ocean_t_shirt",
-        pos: new THREE.Vector3(_id, 0, -5*_id)
+        pos: new THREE.Vector3(_id, 0, -2*_id)
     }
 }
