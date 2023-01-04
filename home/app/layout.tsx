@@ -2,8 +2,7 @@ import '@/styles/dist.css';
 import React from 'react';
 import AddressBar from '@/ui/AddressBar';
 import GlobalNav from './GlobalNav';
-import GlobalCanvas from "./GlobalCanvas";
-import Header from "@/ui/Header";
+import Header from "@/ui/Organisms/Header";
 
 export default function RootLayout({
   children,
@@ -13,26 +12,24 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>Ocean-T-shirt</title>
+        <title>Haruka Takahira's Portfolio</title>
       </head>
-      <body className="overflow-y-scroll bg-zinc-900">
+      <body className="overflow-y-scroll bg-zinc-900 flex-col">
+        <Header />
         <div className="grid grid-cols-[1fr,minmax(auto,240px),min(800px,100%),1fr] gap-x-8 py-8">
-          <Header />
-          <div className="col-start-2 col-end-4 mb-10 h-96">
-            <GlobalCanvas />
-          </div>
           <div className="col-start-2">
             <GlobalNav />
           </div>
 
           <div className="col-start-3 space-y-6">
-            <AddressBar />
+            {/*<AddressBar />*/}
 
             <div className="rounded-xl border border-zinc-800 bg-black p-8">
               {children}
             </div>
           </div>
 
+          {/* TODO add: header */}
           <div className="col-start-3 col-end-4 mt-28 flex items-center justify-center">
             <div className="text-sm text-zinc-600">
               Created by the <b>Next.js</b>
