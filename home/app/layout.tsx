@@ -1,6 +1,5 @@
 import '@/styles/dist.css';
 import React from 'react';
-import AddressBar from '@/ui/AddressBar';
 import GlobalNav from './GlobalNav';
 import Header from '@/ui/Organisms/Header';
 import RootStyleRegistry from './RootStyleRegistry';
@@ -25,8 +24,6 @@ export default function RootLayout({
               </div>
 
               <div className="col-start-3 space-y-6">
-                {/*<AddressBar />*/}
-
                 <div className="rounded-xl border border-zinc-800 bg-black p-8">
                   {children}
                 </div>
