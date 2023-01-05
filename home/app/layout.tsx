@@ -32,7 +32,7 @@ export default function RootLayout({
                 </div>
               </div>
 
-              {/* TODO add: header */}
+              {/* TODO add: footer */}
               <div className="col-start-3 col-end-4 mt-28 flex items-center justify-center">
                 <div className="text-sm text-zinc-600">
                   Created by the <b>Next.js</b>
