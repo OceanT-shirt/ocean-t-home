@@ -1,27 +1,25 @@
-import styled from "@emotion/styled";
-import React, {ReactNode} from "react";
+'use client';
+
+import styled from '@emotion/styled';
+import React, { ReactNode } from 'react';
 
 interface TagProps {
-    kind?: "default" | "energetic" | "pale"
+  kind?: 'default' | 'energetic' | 'pale';
 }
 
 const getTagStyle = (kind?: string) => {
-    return "red"
-}
+  return 'red';
+};
 
 const StyledTag = styled.div<TagProps>`
-    color: ${(props) => getTagStyle(props?.kind)}
-`
+  color: ${(props) => getTagStyle(props?.kind)};
+`;
 
 export const Tag = ({
-    children,
-    ...props
+  children,
+  ...props
 }: React.HtmlHTMLAttributes<HTMLDivElement> & {
-    children: ReactNode
+  children: ReactNode;
 }) => {
-    return (
-        <StyledTag {...props}>
-            {children}
-        </StyledTag>
-    )
-}
+  return <StyledTag {...props}>{children}</StyledTag>;
+};

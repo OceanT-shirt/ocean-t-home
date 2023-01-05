@@ -1,9 +1,9 @@
-import { demos } from '@/lib/demos';
-import Link from 'next/link';
+import {ProductItemList} from "@/ui/Organisms/ProductItemList";
 
 export default function Page() {
   return (
       <div className="">
+          <ProductItemList items={[{title: "", area: "", text: "", techTags: [""]}]} />
       </div>
     // <div className="space-y-6">
     //   <div className="space-y-8 text-white">
