@@ -4,16 +4,21 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import clsx from 'clsx';
+import { Color } from '../../constants/Color';
 
 const StyledParagraph = styled.p<{
   kind?: 'default' | 'title' | 'subtitle';
 }>`
+  color: ${Color.TEXT};
   ${({ kind }) => {
     // if (kind == 'default')
     //   return css`
     //     color: blue;
     //   `;
-    if (kind == 'title') return css``;
+    if (kind == 'subtitle')
+      return css`
+        color: ${Color.BRANDMAIN};
+      `;
   }}
 `;
 StyledParagraph.defaultProps = {
@@ -43,8 +48,12 @@ export function Text({
   );
 }
 
-const StyledH1 = styled.h1``;
-const StyledH2 = styled.h2``;
+const StyledH1 = styled.h1`
+  color: ${Color.TEXT};
+`;
+const StyledH2 = styled.h2`
+  color: ${Color.TEXT};
+`;
 
 // @dev h1 should be only used once in a webpage: https://developer.mozilla.org/ja/docs/Web/HTML/Element/Heading_Elements
 

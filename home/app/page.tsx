@@ -1,13 +1,10 @@
 import { ProductItemList } from '@/ui/Organisms/ProductItemList';
+import { getProductMock } from '@/lib/mocks';
 
 export default function Page() {
   return (
     <div className="">
-      <ProductItemList
-        items={[
-          { title: 'Hoge', area: 'Fuga', text: 'gaga', techTags: ['sasasa'] },
-        ]}
-      />
+      <ProductItemList items={getProductMock('EN')} />
     </div>
     // <div className="space-y-6">
     //   <div className="space-y-8 text-white">

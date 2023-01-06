@@ -11,7 +11,7 @@ const HeadContainer = styled.header`
   display: flex;
   border: 0 solid #e5e7eb;
   color: rgb(0 0 0);
-  background-color: #AAAAAA;
+  background-color: #aaaaaa;
   flex-grow: 1;
 `;
 

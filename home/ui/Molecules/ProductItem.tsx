@@ -13,7 +13,7 @@ interface Props {
 export const ProductItem = ({ title, area, text, techTags }: Props) => {
   // TODO: add responsive transform
   return (
-    <div className={'flex flex-row bg-red-600'}>
+    <div className={'flex h-56 flex-row'}>
       <div className={'bg-vercel-blue'}>
         {/*<MediaDisplay />*/}
         <Text kind={'default'} color={'red'}>
