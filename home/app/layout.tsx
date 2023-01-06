@@ -14,7 +14,7 @@ export default function RootLayout({
       <head>
         <title>Haruka Takahira's Portfolio</title>
       </head>
-      <body className="flex-col overflow-y-scroll bg-zinc-900">
+      <body className="flex-col overflow-y-scroll bg-white">
         <RootStyleRegistry>
           <>
             <Header />

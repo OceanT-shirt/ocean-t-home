@@ -68,7 +68,11 @@ export function HeadingText({
 }) {
   switch (kind) {
     case 'h1':
-      return <StyledH1 {...props}>{children}</StyledH1>;
+      return (
+        <StyledH1 className={'text-xl'} {...props}>
+          {children}
+        </StyledH1>
+      );
     case 'h2':
       return (
         <StyledH2 className={'text-4xl font-bold'} {...props}>

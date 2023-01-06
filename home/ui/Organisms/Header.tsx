@@ -2,28 +2,24 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { HeadingText, Text } from '@/ui/Atoms/Text';
 
 const HeadContainer = styled.header`
   position: relative;
   height: 64px;
   align-items: center;
-  justify-self: center;
+  justify-content: center;
   display: flex;
   border: 0 solid #e5e7eb;
   color: rgb(0 0 0);
-  background-color: #aaaaaa;
   flex-grow: 1;
-`;
-
-const Title = styled.span`
-  margin: 0 auto;
 `;
 
 export default function Header() {
   return (
     <HeadContainer>
       {/*<NextJsLogo />*/}
-      <Title>Haruka Takahira</Title>
+      <HeadingText kind={'h1'}>Haruka Takahira</HeadingText>
     </HeadContainer>
   );
 }
