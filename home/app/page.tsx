@@ -1,10 +1,14 @@
-import {ProductItemList} from "@/ui/Organisms/ProductItemList";
+import { ProductItemList } from '@/ui/Organisms/ProductItemList';
 
 export default function Page() {
   return (
-      <div className="">
-          <ProductItemList items={[{title: "", area: "", text: "", techTags: [""]}]} />
-      </div>
+    <div className="">
+      <ProductItemList
+        items={[
+          { title: 'Hoge', area: 'Fuga', text: 'gaga', techTags: ['sasasa'] },
+        ]}
+      />
+    </div>
     // <div className="space-y-6">
     //   <div className="space-y-8 text-white">
     //     {demos
