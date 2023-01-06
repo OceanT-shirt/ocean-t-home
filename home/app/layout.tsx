@@ -24,9 +24,7 @@ export default function RootLayout({
               </div>
 
               <div className="col-start-3 space-y-6">
-                <div className="rounded-xl border border-zinc-800 bg-white p-8">
-                  {children}
-                </div>
+                <div className="rounded-xl border p-8">{children}</div>
               </div>
 
               {/* TODO add: footer */}
