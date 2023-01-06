@@ -6,6 +6,7 @@ import { css } from '@emotion/react';
 import clsx from 'clsx';
 import { Color } from '../../constants/Color';
 
+// TODO: modify invalid override of ...props
 const StyledParagraph = styled.p<{
   kind?: 'default' | 'title' | 'subtitle';
 }>`

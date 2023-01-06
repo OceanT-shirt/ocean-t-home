@@ -32,9 +32,23 @@ export const mocks: Product[] = [
       EN: 'NLP',
     },
     text: {
-      EN: 'This is sample.',
+      EN: 'This is a sample.',
     },
-    techTags: ['MUI'],
+    techTags: ['MUI', 'Colly'],
+    mediaUrls: [],
+    links: [],
+  },
+  {
+    title: {
+      EN: 'GOLE',
+    },
+    area: {
+      EN: 'NLP',
+    },
+    text: {
+      EN: 'This is a sample.',
+    },
+    techTags: ['MUI', 'Colly'],
     mediaUrls: [],
     links: [],
   },

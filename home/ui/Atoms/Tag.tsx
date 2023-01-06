@@ -1,25 +1,41 @@
 'use client';
 
 import styled from '@emotion/styled';
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { css } from '@emotion/react';
+import { Color } from '../../constants/Color';
+import { Text } from '@/ui/Atoms/Text';
 
 interface TagProps {
   kind?: 'default' | 'energetic' | 'pale';
 }
 
 const getTagStyle = (kind?: string) => {
-  return 'red';
+  if (kind == 'default') {
+    return css`
+      background-color: ${Color.BRANDMAIN};
+    `;
+  }
+  return css``;
 };
 
 const StyledTag = styled.div<TagProps>`
-  color: ${(props) => getTagStyle(props?.kind)};
+  ${(props) => getTagStyle(props?.kind)};
 `;
 
 export const Tag = ({
-  children,
+  text,
+  kind = 'default',
   ...props
 }: React.HtmlHTMLAttributes<HTMLDivElement> & {
-  children: ReactNode;
+  text: string;
+  kind?: 'default' | 'energetic' | 'pale';
 }) => {
-  return <StyledTag {...props}>{children}</StyledTag>;
+  return (
+    <StyledTag className={'rounded-md px-4 py-2'} kind={kind} {...props}>
+      <Text kind={'default'} color={Color.WHITE}>
+        {text}
+      </Text>
+    </StyledTag>
+  );
 };
