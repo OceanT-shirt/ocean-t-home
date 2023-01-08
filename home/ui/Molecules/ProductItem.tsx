@@ -7,19 +7,30 @@ interface Props {
   area: string;
   text: string;
   techTags: string[];
-  // mediaUrls
-  // links
+  mediaUrls: {
+    alt: string;
+    type: 'img' | 'video';
+    url: string;
+  }[];
+  links: {
+    title: string;
+    url: string;
+  }[];
 }
 
-export const ProductItem = ({ title, area, text, techTags }: Props) => {
+export const ProductItem = ({
+  title,
+  area,
+  text,
+  techTags,
+  mediaUrls,
+  links,
+}: Props) => {
   // TODO: add responsive transform
   return (
     <div className={'flex h-56 flex-row'}>
-      <div className={'w-96 bg-vercel-blue'}>
-        {/*<MediaDisplay />*/}
-        <Text kind={'default'} color={'red'}>
-          #TODO add image
-        </Text>
+      <div className={'flex h-56 w-96 flex-col'}>
+        <MediaDisplay mediaArray={mediaUrls} />
       </div>
       <div className={'ml-4 flex flex-col gap-y-2'}>
         <Text kind={'title'}>{title}</Text>

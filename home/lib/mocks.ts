@@ -49,8 +49,24 @@ export const mocks: Product[] = [
       EN: 'This is a sample.',
     },
     techTags: ['MUI', 'Colly'],
-    mediaUrls: [],
-    links: [],
+    mediaUrls: [
+      {
+        alt: 'main',
+        type: 'img',
+        url: 'https://placeimg.com/640/480/any',
+      },
+      {
+        alt: 'main',
+        type: 'img',
+        url: 'https://placeimg.com/1920/1080/any',
+      },
+    ],
+    links: [
+      {
+        title: 'GitHub',
+        url: '',
+      },
+    ],
   },
 ];
 
@@ -61,6 +77,8 @@ export const getProductMock = (lang: 'JA' | 'EN') => {
       area: mock.area.EN,
       text: mock.text.EN,
       techTags: mock.techTags,
+      mediaUrls: mock.mediaUrls,
+      links: mock.links,
     };
   });
   return m;

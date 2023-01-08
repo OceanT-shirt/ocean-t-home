@@ -7,6 +7,15 @@ interface Props {
     area: string;
     text: string;
     techTags: string[];
+    mediaUrls: {
+      alt: string;
+      type: 'img' | 'video';
+      url: string;
+    }[];
+    links: {
+      title: string;
+      url: string;
+    }[];
   }[];
 }
 
@@ -25,6 +34,9 @@ export const ProductItemList = ({ items }: Props) => {
               area={item.area}
               text={item.text}
               techTags={item.techTags}
+              mediaUrls={item.mediaUrls}
+              links={item.links}
+              key={items.indexOf(item)}
             />
           );
         })}

@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placeimg.com',
+        port: '',
+        pathname: '/**/*',
+      },
+    ],
+  },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   swcMinify: true,
   experimental: {
