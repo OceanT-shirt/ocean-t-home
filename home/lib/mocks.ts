@@ -26,13 +26,13 @@ type Link = {
 export const mocks: Product[] = [
   {
     title: {
-      EN: 'GOLE',
+      EN: 'GOLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE',
     },
     area: {
-      EN: 'NLP',
+      EN: 'NLPLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE',
     },
     text: {
-      EN: 'This is a sample.',
+      EN: 'This is a sample.This is a sample.This is a sample.This is a sample. This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.This is a sample.',
     },
     techTags: ['MUI', 'Colly'],
     mediaUrls: [],

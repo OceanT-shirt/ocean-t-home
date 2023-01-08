@@ -37,6 +37,7 @@ export function Text({
   return (
     <StyledParagraph
       className={clsx(
+        'truncate',
         kind == 'title' && 'text-2xl font-bold',
         kind == 'subtitle' && 'text-xl font-bold',
         kind == 'default' && 'text-base',
@@ -69,13 +70,13 @@ export function HeadingText({
   switch (kind) {
     case 'h1':
       return (
-        <StyledH1 className={'text-xl'} {...props}>
+        <StyledH1 className={'truncate text-xl'} {...props}>
           {children}
         </StyledH1>
       );
     case 'h2':
       return (
-        <StyledH2 className={'text-4xl font-bold'} {...props}>
+        <StyledH2 className={'truncate text-4xl font-bold'} {...props}>
           {children}
         </StyledH2>
       );
