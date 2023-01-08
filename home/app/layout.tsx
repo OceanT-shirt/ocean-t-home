@@ -18,8 +18,8 @@ export default function RootLayout({
         <RootStyleRegistry>
           <>
             <Header />
-            <div className="flex flex-row gap-x-8 py-8">
-              <div className="w-56">
+            <div className="relative flex flex-row gap-x-8 py-8">
+              <div className="absolute bottom-0 left-0 z-10 w-56 pb-5 pl-5">
                 <GlobalNav />
               </div>
 
