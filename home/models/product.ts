@@ -1,4 +1,5 @@
 type Product = {
+  id?: string;
   title: MultiLangStr;
   area: MultiLangStr;
   text: MultiLangStr;

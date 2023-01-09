@@ -4,7 +4,9 @@ export const revalidate = 3600; // Management cache. See: https://beta.nextjs.or
 
 async function getProducts() {
   const snapshot = await db.collection('products').get();
-  snapshot.forEach((doc) => {});
+  snapshot.forEach((doc) => {
+    console.log(doc.id, '=>', doc.data());
+  });
 }
 
 export { getProducts };
