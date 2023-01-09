@@ -44,3 +44,5 @@ styles/dist.css
 
 # env
 *.env
+*.env.local
+credentials
