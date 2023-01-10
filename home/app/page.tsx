@@ -1,7 +1,13 @@
 import { ProductItemList } from '@/ui/Organisms/ProductItemList';
 import { getProductMock } from '@/lib/mocks';
+import { getProducts } from '../api/getProducts';
+import { use } from 'react';
 
 export default function Page() {
+  const products = use(getProducts());
+  // TODO add JA/EN transition button
+  // TODO add // func
+
   return (
     <div className="">
       <ProductItemList items={getProductMock('EN')} />

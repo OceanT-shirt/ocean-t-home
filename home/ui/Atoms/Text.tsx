@@ -22,9 +22,6 @@ const StyledParagraph = styled.p<{
       `;
   }}
 `;
-StyledParagraph.defaultProps = {
-  kind: 'default',
-};
 
 export function Text({
   kind = 'default',
