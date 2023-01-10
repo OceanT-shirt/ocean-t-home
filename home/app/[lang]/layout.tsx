@@ -6,11 +6,13 @@ import RootStyleRegistry from './RootStyleRegistry';
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: string };
 }) {
   return (
-    <html>
+    <html lang={params.lang}>
       <head>
         <title>Haruka Takahira's Portfolio</title>
       </head>

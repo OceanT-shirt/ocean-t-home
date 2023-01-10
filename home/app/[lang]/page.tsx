@@ -1,16 +1,19 @@
 import { ProductItemList } from '@/ui/Organisms/ProductItemList';
-import { getProductMock } from '@/lib/mocks';
-import { getProducts } from '../api/getProducts';
+import { getProducts } from '../../api/getProducts';
 import { use } from 'react';
+import { Locale } from '@/lib/i18n-config';
 
-export default function Page() {
+export default function Page({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) {
   const products = use(getProducts());
-  // TODO add JA/EN transition button
-  // TODO add // func
+  const data = products.map((product) => product.getDataByLocale(lang));
 
   return (
     <div className="">
-      <ProductItemList items={getProductMock('EN')} />
+      <ProductItemList items={data} />
     </div>
     // <div className="space-y-6">
     //   <div className="space-y-8 text-white">

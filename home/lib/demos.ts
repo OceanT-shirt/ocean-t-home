@@ -44,12 +44,12 @@ export const demos: Item[] = [
         name: 'Loading',
         slug: 'loading',
         description:
-          'Create meaningful loading UI for specific parts of an app',
+          'Create meaningful loading UI for specific parts of an [lang]',
       },
       {
         name: 'Error',
         slug: 'error-handling',
-        description: 'Create error UI for specific parts of an app',
+        description: 'Create error UI for specific parts of an [lang]',
       },
     ],
   },

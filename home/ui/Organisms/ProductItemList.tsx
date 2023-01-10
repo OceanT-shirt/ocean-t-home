@@ -1,22 +1,11 @@
+'use client';
+
 import { ProductItem } from '@/ui/Molecules/ProductItem';
 import { HeadingText } from '@/ui/Atoms/Text';
+import { ProductProps } from '../../models/product';
 
 interface Props {
-  items: {
-    title: string;
-    area: string;
-    text: string;
-    techTags: string[];
-    mediaUrls: {
-      alt: string;
-      type: 'img' | 'video';
-      url: string;
-    }[];
-    links: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items: ProductProps[];
 }
 
 export const ProductItemList = ({ items }: Props) => {

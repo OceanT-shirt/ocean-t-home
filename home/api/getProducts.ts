@@ -1,11 +1,5 @@
 import { db } from '@/lib/firestore';
-import {
-  Link,
-  MediaUrl,
-  MultiLingualText,
-  Product,
-  ProductProps,
-} from 'models/product';
+import { Link, MediaUrl, Product } from 'models/product';
 
 export const revalidate = 3600; // Management cache. See: https://beta.nextjs.org/docs/data-fetching/fetching#segment-cache-configuration
 

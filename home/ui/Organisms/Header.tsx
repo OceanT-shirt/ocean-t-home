@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HeadingText, Text } from '@/ui/Atoms/Text';
+import LocaleSwitcher from '@/ui/Molecules/LocaleSwitcher';
 
 const HeadContainer = styled.header`
   position: relative;
@@ -20,6 +21,7 @@ export default function Header() {
     <HeadContainer>
       {/*<NextJsLogo />*/}
       <HeadingText kind={'h1'}>Haruka Takahira</HeadingText>
+      <LocaleSwitcher />
     </HeadContainer>
   );
 }

@@ -35,7 +35,8 @@ class Product {
     this.links = links;
   }
 
-  getDataByLocale(locale: 'en' | 'ja'): ProductProps {
+  getDataByLocale(locale?: 'en' | 'ja' | string): ProductProps {
+    if (locale !== 'en' && locale !== 'ja') locale = 'en';
     return {
       id: this.id,
       title: this.title.getTextByLocale(locale),
@@ -66,8 +67,9 @@ class MultiLingualText {
     if (ja) this.ja = ja;
   }
 
-  getTextByLocale(locale: 'en' | 'ja'): string {
-    if (locale == 'en' && this.ja) return this.ja;
+  getTextByLocale(locale?: 'en' | 'ja' | string): string {
+    if (locale !== 'en' && locale !== 'ja') locale = 'en';
+    if (locale == 'ja' && this.ja) return this.ja;
     return this.en;
   }
 
