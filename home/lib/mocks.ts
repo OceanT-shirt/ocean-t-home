@@ -1,6 +1,6 @@
-import { Product } from '../models/product';
+import { ProductProps } from '../models/product';
 
-export const mocks: Product[] = [
+export const mocks: ProductProps[] = [
   {
     title: {
       EN: 'GOLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE',

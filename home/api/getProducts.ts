@@ -1,5 +1,11 @@
 import { db } from '@/lib/firestore';
-import { Link, MediaUrl, Product } from 'models/product';
+import {
+  Link,
+  MediaUrl,
+  MultiLingualText,
+  Product,
+  ProductProps,
+} from 'models/product';
 
 export const revalidate = 3600; // Management cache. See: https://beta.nextjs.org/docs/data-fetching/fetching#segment-cache-configuration
 
@@ -8,10 +14,10 @@ const productsConverter = {
   toFirestore: (data: Product): FirebaseFirestore.DocumentData => {
     return {
       TechTags: data.techTags,
-      Title: data.title,
-      Text: data.text,
+      Title: data.title.getDict(),
+      Text: data.text.getDict(),
       Links: data.links,
-      Area: data.area,
+      Area: data.area.getDict(),
       MediaUrls: data.mediaUrls,
     };
   },
@@ -19,13 +25,13 @@ const productsConverter = {
     const id = snap.id;
     const data = snap.data();
     // TODO: add validator
-    return {
-      id: id,
-      title: data.Title,
-      area: data.Area,
-      text: data.Text,
-      techTags: data.TechTags,
-      mediaUrls: data.MediaUrls.map(
+    return new Product(
+      id,
+      data.Title,
+      data.Area,
+      data.Text,
+      data.TechTags,
+      data.MediaUrls.map(
         (mu: any) =>
           ({
             alt: mu.alt,
@@ -33,14 +39,14 @@ const productsConverter = {
             url: mu.url,
           } as MediaUrl),
       ),
-      links: data.Links.map(
+      data.Links.map(
         (l: any) =>
           ({
             title: l.title,
             url: l.url,
           } as Link),
       ),
-    };
+    );
   },
 };
 
@@ -49,15 +55,7 @@ async function getProducts(): Promise<Product[]> {
     .collection('products')
     .withConverter(productsConverter)
     .get();
-  // let products: Product[];
-  // snapshot.forEach((doc) => {
-  //   console.log(doc.id, '=>', doc.data());
-  //   // TODO: add validation
-  //   const product: Product = {
-  //     id: doc.id,
-  //     title: {},
-  //   };
-  // });
+
   let products: Product[] = [];
   snapshot.forEach((doc) => products.push(doc.data()));
   return products;
