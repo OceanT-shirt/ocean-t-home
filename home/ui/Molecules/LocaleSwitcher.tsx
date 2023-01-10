@@ -25,7 +25,7 @@ export default function LocaleSwitcher() {
           Select Language
         </option>
         {i18n.locales.map((locale) => {
-          return <option>{locale}</option>;
+          return <option key={i18n.locales.indexOf(locale)}>{locale}</option>;
         })}
       </select>
     </div>
