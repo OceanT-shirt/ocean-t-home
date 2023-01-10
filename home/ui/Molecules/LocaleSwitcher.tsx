@@ -1,7 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '@/lib/i18n-config';
 
 export default function LocaleSwitcher() {
@@ -12,19 +11,23 @@ export default function LocaleSwitcher() {
     segments[1] = locale;
     return segments.join('/');
   };
+  const router = useRouter();
 
   return (
     <div>
-      <p>Locale switcher:</p>
-      <ul>
+      <select
+        className="select-ghost select w-full max-w-xs"
+        onChange={(event) =>
+          router.push(redirectedPathName(event.target.value))
+        }
+      >
+        <option disabled selected>
+          Select Language
+        </option>
         {i18n.locales.map((locale) => {
-          return (
-            <li key={locale}>
-              <Link href={redirectedPathName(locale)}>{locale}</Link>
-            </li>
-          );
+          return <option>{locale}</option>;
         })}
-      </ul>
+      </select>
     </div>
   );
 }
