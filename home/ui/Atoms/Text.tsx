@@ -22,7 +22,7 @@ export function Text({
   return (
     <StyledParagraph
       className={clsx(
-        'truncate',
+        'text-ellipsis',
         kind == 'title' && 'text-2xl font-bold text-brand-text',
         kind == 'subtitle' && 'text-xl font-bold text-brand-main',
         kind == 'default' && 'text-base',
