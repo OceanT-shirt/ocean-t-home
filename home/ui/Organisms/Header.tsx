@@ -30,7 +30,7 @@ export default function Header() {
         }
       >
         <Link href={process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''}>
-          <FaLinkedin color={Color.BACKGROUND} />
+          <FaLinkedin className={''} />
         </Link>
         <Link href={process.env.NEXT_PUBLIC_GITHUB_URL ?? ''}>
           <FaGithub color={Color.BACKGROUND} />

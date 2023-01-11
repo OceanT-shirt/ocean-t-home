@@ -16,7 +16,7 @@ export default function RootLayout({
       <head>
         <title>Haruka Takahira's Portfolio</title>
       </head>
-      <body className="flex-col overflow-y-scroll bg-brand-background">
+      <body className="appearance-none flex-col bg-brand-background">
         <RootStyleRegistry>
           <>
             <Header />
