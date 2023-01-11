@@ -16,7 +16,7 @@ export default function LocaleSwitcher() {
   return (
     <div>
       <select
-        className="select-ghost select w-full max-w-xs"
+        className="select-ghost select w-full max-w-xs text-base font-semibold uppercase tracking-wider text-zinc-300"
         onChange={(event) =>
           router.push(redirectedPathName(event.target.value))
         }

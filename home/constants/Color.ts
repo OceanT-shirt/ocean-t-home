@@ -10,10 +10,10 @@ type ColorObject = {
 };
 
 const Color: ColorObject = {
-  TEXT: '#111111' as ColorType,
+  TEXT: '#1d1d1d' as ColorType,
   BRANDMAIN: '#0386ff' as ColorType,
   BRANDSUB: '#002967' as ColorType,
-  BACKGROUND: '#FCFCFC' as ColorType,
+  BACKGROUND: '#F5F5F7' as ColorType,
   WHITE: '#fff' as ColorType,
   BLACK: '#000' as ColorType,
 };

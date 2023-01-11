@@ -7,7 +7,7 @@ module.exports = {
   ],
   plugins: [require('daisyui')],
   daisyui: {
-    styled: false,
+    styled: true,
     themes: false,
     base: false,
     utils: true,
@@ -26,6 +26,10 @@ module.exports = {
           cyan: '#50E3C2',
           orange: '#F5A623',
           violet: '#7928CA',
+        },
+        brand: {
+          text: '#1f1f1f',
+          background: '#f5f5f7',
         },
       },
       keyframes: ({ theme }) => ({

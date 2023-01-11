@@ -8,7 +8,7 @@ import { Color } from '../../constants/Color';
 
 // TODO: modify invalid override of ...props
 const StyledParagraph = styled.p<{
-  kind?: 'default' | 'title' | 'subtitle';
+  kind?: 'default' | 'title' | 'subtitle' | 'header';
 }>`
   color: ${Color.TEXT};
   ${({ kind }) => {
@@ -29,7 +29,7 @@ export function Text({
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode;
-  kind?: 'default' | 'title' | 'subtitle';
+  kind?: 'default' | 'title' | 'subtitle' | 'header';
 }) {
   return (
     <StyledParagraph
@@ -38,6 +38,8 @@ export function Text({
         kind == 'title' && 'text-2xl font-bold',
         kind == 'subtitle' && 'text-xl font-bold',
         kind == 'default' && 'text-base',
+        kind == 'header' &&
+          'text-base font-semibold uppercase tracking-wider text-zinc-500',
       )}
       kind={kind}
       {...props}
@@ -48,7 +50,7 @@ export function Text({
 }
 
 const StyledH1 = styled.h1`
-  color: ${Color.TEXT};
+  //color: ${Color.WHITE};
 `;
 const StyledH2 = styled.h2`
   color: ${Color.TEXT};
@@ -67,7 +69,12 @@ export function HeadingText({
   switch (kind) {
     case 'h1':
       return (
-        <StyledH1 className={'truncate text-xl'} {...props}>
+        <StyledH1
+          className={
+            'truncate text-lg font-semibold uppercase tracking-wider text-zinc-200'
+          }
+          {...props}
+        >
           {children}
         </StyledH1>
       );
