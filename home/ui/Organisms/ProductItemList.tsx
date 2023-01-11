@@ -11,11 +11,11 @@ interface Props {
 export const ProductItemList = ({ items }: Props) => {
   return (
     <div className={'flex flex-col'}>
-      <div className={'my-2'}>
+      <div className={'my-4'}>
         {/* TODO add multilingual text */}
         <HeadingText kind={'h2'}>Products</HeadingText>
       </div>
-      <div className={'flex flex-col gap-y-2'}>
+      <div className={'flex flex-col gap-y-4'}>
         {items.map((item) => {
           return (
             <ProductItem

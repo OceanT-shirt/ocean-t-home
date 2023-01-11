@@ -2,30 +2,18 @@
 
 import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import clsx from 'clsx';
 import { Color } from '../../constants/Color';
 
 // TODO: modify invalid override of ...props
 const StyledParagraph = styled.p<{
   kind?: 'default' | 'title' | 'subtitle' | 'header';
-}>`
-  color: ${Color.TEXT};
-  ${({ kind }) => {
-    // if (kind == 'default')
-    //   return css`
-    //     color: blue;
-    //   `;
-    if (kind == 'subtitle')
-      return css`
-        color: ${Color.BRANDMAIN};
-      `;
-  }}
-`;
+}>``;
 
 export function Text({
   kind = 'default',
   children,
+  className,
   ...props
 }: React.HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode;
@@ -35,11 +23,12 @@ export function Text({
     <StyledParagraph
       className={clsx(
         'truncate',
-        kind == 'title' && 'text-2xl font-bold',
-        kind == 'subtitle' && 'text-xl font-bold',
+        kind == 'title' && 'text-2xl font-bold text-brand-text',
+        kind == 'subtitle' && 'text-xl font-bold text-brand-main',
         kind == 'default' && 'text-base',
         kind == 'header' &&
-          'text-base font-semibold uppercase tracking-wider text-zinc-500',
+          'text-base font-semibold tracking-wider text-zinc-500',
+        className ?? '',
       )}
       kind={kind}
       {...props}

@@ -33,7 +33,7 @@ export const Tag = ({
 }) => {
   return (
     <StyledTag className={'rounded-md px-4 py-2'} kind={kind} {...props}>
-      <Text kind={'default'} color={Color.WHITE}>
+      <Text kind={'header'} className={'text-brand-background'}>
         {text}
       </Text>
     </StyledTag>

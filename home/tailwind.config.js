@@ -30,6 +30,8 @@ module.exports = {
         brand: {
           text: '#1f1f1f',
           background: '#f5f5f7',
+          main: '#0043a8',
+          sub: '#71717A',
         },
       },
       keyframes: ({ theme }) => ({

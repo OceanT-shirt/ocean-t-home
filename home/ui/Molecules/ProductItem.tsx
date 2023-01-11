@@ -32,7 +32,7 @@ export const ProductItem = ({
       <div className={'col-span-2 h-52'}>
         <MediaDisplay mediaArray={mediaUrls} />
       </div>
-      <div className={'col-span-2 ml-4 h-52 gap-y-2'}>
+      <div className={'col-span-2 ml-4 h-52 gap-y-4'}>
         <div className={'w-9/12'}>
           <Text kind={'title'}>{title}</Text>
           <Text kind={'subtitle'}>{area}</Text>
