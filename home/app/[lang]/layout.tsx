@@ -3,6 +3,7 @@ import React from 'react';
 import GlobalNav from './GlobalNav';
 import Header from '@/ui/Organisms/Header';
 import RootStyleRegistry from './RootStyleRegistry';
+import { Footer } from '@/ui/Organisms/Footer';
 
 export default function RootLayout({
   children,
@@ -30,21 +31,8 @@ export default function RootLayout({
                   {children}
                 </div>
               </div>
-
-              {/* TODO add: footer */}
-              <div className="col-start-3 col-end-4 mt-28 flex items-center justify-center">
-                <div className="text-sm text-zinc-600">
-                  Built with <b>Next.js</b>
-                  {'. '}
-                  <a
-                    className="underline decoration-dotted underline-offset-4"
-                    href="https://github.com/OceanT-shirt/ocean-t-home/tree/main/home"
-                  >
-                    View the code
-                  </a>
-                </div>
-              </div>
             </div>
+            <Footer />
           </>
         </RootStyleRegistry>
       </body>
