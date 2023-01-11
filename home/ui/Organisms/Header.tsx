@@ -4,9 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeadingText } from '@/ui/Atoms/Text';
 import LocaleSwitcher from '@/ui/Molecules/LocaleSwitcher';
-import { FaGithub, FaLinkedin } from 'react-icons/all';
+import { FaAccessibleIcon, FaGithub, FaLinkedin } from 'react-icons/all';
 import { Color } from '../../constants/Color';
 import Link from 'next/link';
+import { IconButton } from '@/ui/Atoms/IconButton';
 
 const HeadContainer = styled.header`
   background: rgba(0, 57, 115, 0.7);
@@ -30,10 +31,10 @@ export default function Header() {
         }
       >
         <Link href={process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''}>
-          <FaLinkedin className={''} />
+          <IconButton icon={FaLinkedin} />
         </Link>
         <Link href={process.env.NEXT_PUBLIC_GITHUB_URL ?? ''}>
-          <FaGithub color={Color.BACKGROUND} />
+          <IconButton icon={FaGithub} />
         </Link>
         <LocaleSwitcher />
       </div>
