@@ -25,10 +25,17 @@ export default function RootLayout({
                 <GlobalNav />
               </div>
 
-              <div className="flex flex-grow flex-col">
-                <div className="mx-auto max-w-[65rem] rounded-xl border p-8">
-                  {children}
-                </div>
+              <div
+                className="mx-auto w-full max-w-[90rem] rounded-xl border p-8"
+                style={{
+                  width: '100vw',
+                  minWidth: '40rem',
+                  maxWidth: '60rem',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              >
+                {children}
               </div>
             </div>
 
