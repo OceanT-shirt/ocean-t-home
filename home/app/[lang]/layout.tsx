@@ -16,27 +16,16 @@ export default function RootLayout({
       <head>
         <title>Haruka Takahira's Portfolio</title>
       </head>
-      <body className="mx-auto w-[100vw] max-w-[90rem] flex-col overflow-y-scroll bg-gray-100">
+      <body className="flex-col overflow-y-scroll">
         <RootStyleRegistry>
-          <>
+          <div className="mx-auto w-[100vw] min-w-[40rem] max-w-[90rem]">
             <Header />
-            <div className="relative flex flex-row gap-x-8 py-8">
+            <div className="relative flex min-h-[80vh] flex-row gap-x-8 py-8">
               <div className="absolute bottom-0 left-0 z-10 w-56 pb-5 pl-5">
                 <GlobalNav />
               </div>
 
-              <div
-                className="mx-auto w-full max-w-[90rem] rounded-xl border p-8"
-                style={{
-                  width: '100vw',
-                  minWidth: '40rem',
-                  maxWidth: '60rem',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                }}
-              >
-                {children}
-              </div>
+              <div className="mx-auto w-full max-w-[65rem] p-8">{children}</div>
             </div>
 
             {/* TODO add: footer */}
@@ -52,7 +41,7 @@ export default function RootLayout({
                 </a>
               </div>
             </div>
-          </>
+          </div>
         </RootStyleRegistry>
       </body>
     </html>
