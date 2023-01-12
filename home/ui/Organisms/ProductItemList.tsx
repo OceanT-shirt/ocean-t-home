@@ -15,7 +15,7 @@ export const ProductItemList = ({ items }: Props) => {
         {/* TODO add multilingual text */}
         <HeadingText kind={'h2'}>Products</HeadingText>
       </div>
-      <div className={'flex flex-col gap-y-4'}>
+      <div className={'flex flex-col gap-y-8'}>
         {items.map((item) => {
           return (
             <ProductItem

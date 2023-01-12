@@ -4,8 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeadingText } from '@/ui/Atoms/Text';
 import LocaleSwitcher from '@/ui/Molecules/LocaleSwitcher';
-import { FaAccessibleIcon, FaGithub, FaLinkedin } from 'react-icons/all';
-import { Color } from '../../constants/Color';
+import { FaGithub, FaLinkedin } from 'react-icons/all';
 import Link from 'next/link';
 import { IconButton } from '@/ui/Atoms/IconButton';
 
