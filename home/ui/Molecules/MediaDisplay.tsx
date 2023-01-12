@@ -10,7 +10,7 @@ export const MediaDisplay = ({
   // TODO: add video player
   // TODO: add onclick
   return (
-    <Carousel duration={3000} className={'h-full w-full'}>
+    <Carousel duration={3000} className={'h-full w-full bg-white'}>
       {mediaArray &&
         mediaArray.map((m) => {
           return (
