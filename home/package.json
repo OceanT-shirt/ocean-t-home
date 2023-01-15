@@ -39,6 +39,7 @@
     "react-icons": "4.7.1",
     "react-material-ui-carousel": "3.4.2",
     "react-player": "2.11.0",
+    "react-responsive": "9.0.2",
     "styled-components": "6.0.0-beta.2",
     "styled-jsx": "5.1.1",
     "three": "0.148.0",
