@@ -4,8 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '@/lib/i18n-config';
 import { IconButton } from '@/ui/Atoms/IconButton';
 import { FaGlobe } from 'react-icons/all';
-import { useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import { useRef } from 'react';
 
 export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
   const pathName = usePathname();
