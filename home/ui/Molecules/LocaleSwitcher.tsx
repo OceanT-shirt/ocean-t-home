@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '@/lib/i18n-config';
 import { IconButton } from '@/ui/Atoms/IconButton';
 import { FaGlobe } from 'react-icons/all';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
   const pathName = usePathname();
@@ -15,14 +15,30 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
     return segments.join('/');
   };
   const router = useRouter();
-  const optionRef = useRef<HTMLDivElement>(null);
+  const optionRef = useRef<HTMLUListElement>(null);
+  const optionsDivRef = useRef<HTMLDivElement>(null);
   const handleOptions = (isOpen: boolean) => {
     if (optionRef && optionRef.current)
       optionRef.current.style.display = isOpen ? 'block' : 'none';
   };
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (
+        optionsDivRef.current &&
+        !optionsDivRef.current.contains(event.target)
+      )
+        handleOptions(false);
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [optionsDivRef]);
 
   return (
-    <div>
+    <div className={'relative'}>
       {isCompact ? (
         <>
           <IconButton
@@ -32,17 +48,26 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
             }}
             className={'cursor-pointer'}
           />
-          <div ref={optionRef} className={'hidden cursor-pointer'}>
-            {i18n.locales.map((locale) => {
-              return (
-                <a
-                  key={i18n.locales.indexOf(locale)}
-                  onClick={() => router.push(redirectedPathName(locale))}
-                >
-                  {locale}
-                </a>
-              );
-            })}
+          <div className={'z-10'} ref={optionsDivRef}>
+            <ul
+              ref={optionRef}
+              className={
+                'menu rounded-box absolute right-2 hidden w-20 bg-white p-2'
+              }
+            >
+              {i18n.locales.map((locale) => {
+                return (
+                  <li>
+                    <a
+                      key={i18n.locales.indexOf(locale)}
+                      onClick={() => router.push(redirectedPathName(locale))}
+                    >
+                      {locale}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </>
       ) : (
