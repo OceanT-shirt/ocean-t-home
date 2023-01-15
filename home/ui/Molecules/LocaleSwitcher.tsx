@@ -5,6 +5,7 @@ import { i18n } from '@/lib/i18n-config';
 import { IconButton } from '@/ui/Atoms/IconButton';
 import { FaGlobe } from 'react-icons/all';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
   const pathName = usePathname();
@@ -15,11 +16,10 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
     return segments.join('/');
   };
   const router = useRouter();
-  const optionRef = useRef<HTMLUListElement>(null);
   const optionsDivRef = useRef<HTMLDivElement>(null);
   const handleOptions = (isOpen: boolean) => {
-    if (optionRef && optionRef.current)
-      optionRef.current.style.display = isOpen ? 'block' : 'none';
+    if (optionsDivRef && optionsDivRef.current)
+      optionsDivRef.current.style.display = isOpen ? 'block' : 'none';
   };
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -48,26 +48,21 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
             }}
             className={'cursor-pointer'}
           />
-          <div className={'z-10'} ref={optionsDivRef}>
-            <ul
-              ref={optionRef}
-              className={
-                'menu rounded-box absolute right-2 hidden w-20 bg-white p-2'
-              }
-            >
-              {i18n.locales.map((locale) => {
-                return (
-                  <li>
-                    <a
-                      key={i18n.locales.indexOf(locale)}
-                      onClick={() => router.push(redirectedPathName(locale))}
-                    >
-                      {locale}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+          <div
+            className={'absolute right-2 z-10 hidden w-20 bg-white p-2'}
+            ref={optionsDivRef}
+          >
+            {i18n.locales.map((locale) => {
+              return (
+                <div
+                  className={'cursor-pointer p-2 hover:bg-brand-main'}
+                  key={i18n.locales.indexOf(locale)}
+                  onClick={() => router.push(redirectedPathName(locale))}
+                >
+                  {locale}
+                </div>
+              );
+            })}
           </div>
         </>
       ) : (
