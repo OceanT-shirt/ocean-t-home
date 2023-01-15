@@ -1,0 +1,3 @@
+const getMediaSize = () => {};
+
+export { getMediaSize };

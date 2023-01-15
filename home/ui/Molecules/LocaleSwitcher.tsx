@@ -17,14 +17,10 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
   };
   const router = useRouter();
   const optionRef = useRef<HTMLDivElement>(null);
-  const [optionsIsOpen, setOptionsIsOpen] = useState(false);
-  const handleToggle = (isOpen: boolean) => {
+  const handleOptions = (isOpen: boolean) => {
     if (optionRef && optionRef.current)
       optionRef.current.style.display = isOpen ? 'block' : 'none';
   };
-  useEffect(() => {
-    console.log(optionsIsOpen);
-  }, [optionsIsOpen]);
 
   return (
     <div>
@@ -33,14 +29,11 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
           <IconButton
             icon={FaGlobe}
             onClick={() => {
-              setOptionsIsOpen(true);
-              console.log('gaga');
+              handleOptions(true);
             }}
+            className={'cursor-pointer'}
           />
-          <div
-            ref={optionRef}
-            className={clsx('hidden', optionsIsOpen && 'block')}
-          >
+          <div ref={optionRef} className={'hidden cursor-pointer'}>
             {i18n.locales.map((locale) => {
               return (
                 <a
