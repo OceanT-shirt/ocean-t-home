@@ -50,6 +50,7 @@ const StyledH2 = styled.h2`
 export function HeadingText({
   kind = 'h1',
   children,
+  className,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement> & {
   children: ReactNode;
@@ -59,9 +60,10 @@ export function HeadingText({
     case 'h1':
       return (
         <StyledH1
-          className={
-            'truncate text-lg font-semibold uppercase tracking-wider text-zinc-200'
-          }
+          className={clsx(
+            'truncate text-lg font-semibold uppercase tracking-wider text-zinc-200',
+            className ?? '',
+          )}
           {...props}
         >
           {children}
@@ -69,7 +71,10 @@ export function HeadingText({
       );
     case 'h2':
       return (
-        <StyledH2 className={'truncate text-4xl font-bold'} {...props}>
+        <StyledH2
+          className={clsx('truncate text-4xl font-bold', className ?? '')}
+          {...props}
+        >
           {children}
         </StyledH2>
       );

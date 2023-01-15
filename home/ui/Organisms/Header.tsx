@@ -16,27 +16,29 @@ const HeadContainer = styled.header`
 
 export default function Header() {
   return (
-    <HeadContainer className={'grid h-16 flex-grow grid-cols-3 content-center'}>
-      <div
-        className={
-          'col-span-1 col-start-2 flex flex-col justify-center justify-self-center'
-        }
-      >
-        <HeadingText kind={'h1'}>Haruka Takahira</HeadingText>
+    <HeadContainer
+      className={
+        'relative flex h-16 flex-grow flex-col content-center items-center'
+      }
+    >
+      <div className={'h-16 items-center'}>
+        <HeadingText kind={'h1'} className={'my-auto'}>
+          Haruka Takahira
+        </HeadingText>
       </div>
-      <div
-        className={
-          'col-span-1 flex flex-row items-center gap-x-4 justify-self-end pr-6'
-        }
-      >
-        <Link href={process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''}>
-          <IconButton icon={FaLinkedin} />
-        </Link>
-        <Link href={process.env.NEXT_PUBLIC_GITHUB_URL ?? ''}>
-          <IconButton icon={FaGithub} />
-        </Link>
-        <LocaleSwitcher isCompact={true} />
-      </div>
+      {/*<div*/}
+      {/*  className={*/}
+      {/*    'r-6 absolute flex flex-row items-center gap-x-4 justify-self-end'*/}
+      {/*  }*/}
+      {/*>*/}
+      {/*  <Link href={process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''}>*/}
+      {/*    <IconButton icon={FaLinkedin} />*/}
+      {/*  </Link>*/}
+      {/*  <Link href={process.env.NEXT_PUBLIC_GITHUB_URL ?? ''}>*/}
+      {/*    <IconButton icon={FaGithub} />*/}
+      {/*  </Link>*/}
+      {/*  <LocaleSwitcher />*/}
+      {/*</div>*/}
     </HeadContainer>
   );
 }
