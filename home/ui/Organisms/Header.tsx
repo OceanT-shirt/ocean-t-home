@@ -35,7 +35,7 @@ export default function Header() {
         <Link href={process.env.NEXT_PUBLIC_GITHUB_URL ?? ''}>
           <IconButton icon={FaGithub} />
         </Link>
-        <LocaleSwitcher />
+        <LocaleSwitcher isCompact={true} />
       </div>
     </HeadContainer>
   );

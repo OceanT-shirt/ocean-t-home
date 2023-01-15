@@ -6,6 +6,7 @@ import clsx from 'clsx';
 export const IconButton = ({
   icon,
   className,
+  ...props
 }: IconBaseProps & { icon: IconType }) => {
   return (
     <>
@@ -14,6 +15,7 @@ export const IconButton = ({
           'fill-brand-background hover:fill-brand-sub ease-out duration-200',
           className ?? '',
         ),
+        ...props,
       })}
     </>
   );
