@@ -4,10 +4,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import { i18n } from '@/lib/i18n-config';
 import { IconButton } from '@/ui/Atoms/IconButton';
 import { FaGlobe } from 'react-icons/all';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
+export default function LocaleSwitcher({ isCompact = false }: { isCompact?: boolean }) {
+  const [isCompactState, setIsCompactState] = useState<boolean>(false);
+
+  // To Prevent Hydration Error
+  useEffect(() => setIsCompactState(isCompact), [isCompact])
+
   const pathName = usePathname();
   const redirectedPathName = (locale: string) => {
     if (!pathName) return '/';
@@ -39,7 +44,7 @@ export default function LocaleSwitcher({ isCompact }: { isCompact?: boolean }) {
 
   return (
     <div className={'relative'}>
-      {isCompact ? (
+      {isCompactState ? (
         <>
           <IconButton
             icon={FaGlobe}
