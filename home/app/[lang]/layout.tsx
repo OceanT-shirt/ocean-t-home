@@ -21,11 +21,11 @@ export default function RootLayout({
         <RootStyleRegistry>
           <>
             <Header />
-            <div className="mx-auto w-[100vw] min-w-[40rem] max-w-[90rem]">
+            <div className="mx-auto max-w-[90rem]">
               <div className="relative flex min-h-[80vh] flex-row">
-                <div className="absolute bottom-0 left-0 z-10 w-56 pb-5 pl-5">
-                  {/*<GlobalNav />*/}
-                </div>
+                {/*<div className="absolute bottom-0 left-0 z-10 w-56 pb-5 pl-5">*/}
+                {/*  /!*<GlobalNav />*!/*/}
+                {/*</div>*/}
 
                 <div className="mx-auto w-full max-w-[65rem] p-4">
                   {children}
