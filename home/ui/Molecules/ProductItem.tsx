@@ -29,7 +29,7 @@ export const ProductItem = ({
   // TODO: add responsive transform
   return (
     <div className={'grid grid-cols-2 lg:grid-cols-4'}>
-      <div className={'col-span-2 h-56'}>
+      <div className={'col-span-2 w-full flex flex-col'}>
         <MediaDisplay mediaArray={mediaUrls} />
       </div>
       <div className={'col-span-2 ml-4 flex h-56 flex-col justify-between'}>

@@ -11,17 +11,17 @@ export const MediaDisplay = ({
   // TODO: add video player
   // TODO: add onclick
   return (
-    <Carousel duration={3000} className={'h-full w-full bg-white'}>
+    <Carousel duration={3000} className={'w-full bg-white flex-grow aspect-video'} indicators={false}>
       {mediaArray &&
         mediaArray.map((m) => {
           return (
             <div
-              className={'flex h-full flex-col justify-center'}
+              className={'w-full aspect-video overflow-hidden justify-center'}
               key={mediaArray.indexOf(m)}
             >
               {m.type == 'img' && m.url != '' ? (
                 // <img src={m.url} alt={m.alt} className={'object-cover'} />
-                <Image src={m.url} alt={m.alt} width={400} height={300} sizes="100%" style={{width: '100%', height: 'auto'}} />
+                <Image src={m.url} alt={m.alt} width={480} height={270} sizes="100%" style={{width: '100%', height: 'auto', objectFit: 'cover'}} />
               ) : (
                 <Image src={'/no_image.png'} alt={'no image'} width={400} height={300} sizes="100%" style={{width: '100%', height: 'auto'}} />
               )}
