@@ -1,6 +1,7 @@
 'use client';
 
 import Carousel from 'react-material-ui-carousel';
+import Image from 'next/image';
 
 export const MediaDisplay = ({
   mediaArray,
@@ -19,13 +20,10 @@ export const MediaDisplay = ({
               key={mediaArray.indexOf(m)}
             >
               {m.type == 'img' && m.url != '' ? (
-                <img src={m.url} alt={m.alt} className={'object-cover'} />
+                // <img src={m.url} alt={m.alt} className={'object-cover'} />
+                <Image src={m.url} alt={m.alt} width={400} height={300} sizes="100%" style={{width: '100%', height: 'auto'}} />
               ) : (
-                <img
-                  src={'/no_image.png'}
-                  alt={'no image'}
-                  className={'object-cover'}
-                />
+                <Image src={'/no_image.png'} alt={'no image'} width={400} height={300} sizes="100%" style={{width: '100%', height: 'auto'}} />
               )}
             </div>
           );

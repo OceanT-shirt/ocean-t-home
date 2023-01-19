@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/**/*',
       },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/**/*',
+      }
     ],
   },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
