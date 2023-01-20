@@ -19,7 +19,7 @@ export default function Header() {
   const { isLG } = useMediaSize();
   return (
     <HeadContainer
-      className={'flex-grow grid grid-cols-[max(1fr,240px),auto,max(1fr,150px)]'}
+      className={'flex-grow grid grid-cols-1 sm:grid-cols-[minmax(240px,1fr),auto,minmax(150px,1fr)]'}
     >
       <div className={'cols-span-1 col-start-1 sm:col-start-2 ml-4 sm:mx-auto my-4'}>
         <HeadingText kind={'h1'}>Haruka Takahira</HeadingText>
