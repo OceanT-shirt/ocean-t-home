@@ -72,7 +72,7 @@ export function HeadingText({
     case 'h2':
       return (
         <StyledH2
-          className={clsx('truncate text-4xl font-bold', className ?? '')}
+          className={clsx('truncate text-2xl sm:text-4xl font-bold', className ?? '')}
           {...props}
         >
           {children}
