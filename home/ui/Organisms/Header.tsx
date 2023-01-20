@@ -19,12 +19,12 @@ export default function Header() {
   const { isLG } = useMediaSize();
   return (
     <HeadContainer
-      className={'relative flex flex-grow flex-col items-center justify-center'}
+      className={'flex-grow grid grid-cols-[max(1fr,240px),auto,max(1fr,150px)]'}
     >
-      <div className={'mx-auto my-4'}>
+      <div className={'cols-span-1 col-start-1 sm:col-start-2 ml-4 sm:mx-auto my-4'}>
         <HeadingText kind={'h1'}>Haruka Takahira</HeadingText>
       </div>
-      <div className={'absolute right-6 flex flex-row items-center gap-x-4'}>
+      <div className={'cols-span-1 col-start-3 flex flex-row items-center justify-self-end gap-x-4 mr-4'}>
         <Link href={process.env.NEXT_PUBLIC_LINKEDIN_URL ?? ''}>
           <IconButton icon={FaLinkedin} />
         </Link>
