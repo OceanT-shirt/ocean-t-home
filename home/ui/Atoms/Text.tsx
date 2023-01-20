@@ -23,8 +23,8 @@ export function Text({
     <StyledParagraph
       className={clsx(
         'text-ellipsis',
-        kind == 'title' && 'text-2xl font-bold text-brand-text',
-        kind == 'subtitle' && 'text-xl font-bold text-brand-main',
+        kind == 'title' && 'text-xl sm:text-2xl font-bold text-brand-text',
+        kind == 'subtitle' && 'text-lg sm:text-xl font-bold text-brand-main',
         kind == 'default' && 'text-base',
         kind == 'header' &&
           'text-base font-semibold tracking-wider text-zinc-500',
