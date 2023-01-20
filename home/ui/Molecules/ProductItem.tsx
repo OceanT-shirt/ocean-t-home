@@ -28,11 +28,11 @@ export const ProductItem = ({
 }: Props) => {
   // TODO: add responsive transform
   return (
-    <div className={'grid grid-cols-2 lg:grid-cols-4'}>
-      <div className={'col-span-2 w-full flex flex-col mb-4 lg:mb-0'}>
+    <div className={'grid grid-cols-[min(500px,100%)] lg:grid-cols-2'}>
+      <div className={'col-span-1 flex flex-col mb-4 lg:mb-0'}>
         <MediaDisplay mediaArray={mediaUrls} />
       </div>
-      <div className={'col-span-2 flex h-56 flex-col justify-between lg:pl-4'}>
+      <div className={'col-span-1 flex h-56 flex-col justify-between lg:pl-4'}>
         <div className={'flex-grow gap-y-4'}>
           <div className={'w-9/12'}>
             <Text kind={'title'}>{title}</Text>
