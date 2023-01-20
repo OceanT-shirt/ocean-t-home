@@ -6,6 +6,7 @@ import { IconButton } from '@/ui/Atoms/IconButton';
 import { FaGlobe } from 'react-icons/all';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { Text } from '@/ui/Atoms/Text';
 
 export default function LocaleSwitcher({ isCompact = false }: { isCompact?: boolean }) {
   const [isCompactState, setIsCompactState] = useState<boolean>(false);
@@ -43,9 +44,9 @@ export default function LocaleSwitcher({ isCompact = false }: { isCompact?: bool
   }, [optionsDivRef]);
 
   return (
-    <div className={'relative'}>
+    <div>
       {isCompactState ? (
-        <>
+        <div className={"flex flex-row items-center gap-x-2"}>
           <IconButton
             icon={FaGlobe}
             onClick={() => {
@@ -54,22 +55,25 @@ export default function LocaleSwitcher({ isCompact = false }: { isCompact?: bool
             className={'cursor-pointer'}
           />
           <div
-            className={'absolute right-2 z-10 hidden w-20 bg-white p-2'}
+            className={'hidden flex flex-row'}
             ref={optionsDivRef}
           >
             {i18n.locales.map((locale) => {
               return (
-                <div
-                  className={'cursor-pointer p-2 hover:bg-brand-main'}
-                  key={i18n.locales.indexOf(locale)}
-                  onClick={() => router.push(redirectedPathName(locale))}
-                >
-                  {locale}
+                <div className={"mx-2"}>
+                  <Text
+                    kind={"header"}
+                    className={'cursor-pointer hover:text-brand-sub text-brand-background uppercase'}
+                    key={i18n.locales.indexOf(locale)}
+                    onClick={() => router.push(redirectedPathName(locale))}
+                  >
+                    {locale}
+                  </Text>
                 </div>
               );
             })}
           </div>
-        </>
+        </div>
       ) : (
         <select
           className="select-ghost select w-full max-w-xs text-base font-semibold uppercase tracking-wider text-zinc-300"
