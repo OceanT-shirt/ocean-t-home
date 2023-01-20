@@ -17,7 +17,7 @@ export default function RootLayout({
       <head>
         <title>Haruka Takahira's Portfolio</title>
       </head>
-      <body className="appearance-none flex-col bg-brand-background">
+      <body className="appearance-none flex-col bg-brand-background accent-brand-main">
         <RootStyleRegistry>
           <>
             <Header />
