@@ -12,6 +12,6 @@ Main dir is in `home`. This is my portfolio website powered by Next.js 13 and Fi
 
 I used to developing `homev1` . However, I decided to stop developing it because it was too heavy and I realized it cannot meet the main target's (Recruiters') needs.
 
-...and SQL server is pricy :p
+...and SQL servers are pricy :p
 
 
