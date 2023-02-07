@@ -7,7 +7,7 @@
   - Emotion (Styled Components)
   - DaisyUI
 - Database
-  - Firestore: more budget than CloudSQL 🤗
+  - Firestore: less cost than CloudSQL 🤗
 - Storage
   - Cloud Storage
 - Deploy
