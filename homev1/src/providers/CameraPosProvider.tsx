@@ -20,7 +20,7 @@ interface Props {
 
 
 export const CameraPosProvider = ({children} : Props) => {
-    const [cameraPos, setCameraPos] = useState<THREE.Vector3>(new THREE.Vector3())
+    const [cameraPos, setCameraPos] = useState<THREE.Vector3>(new THREE.Vector3(0, 100, 50))
 
     const newContext: CameraPosContextType = {
         cameraPos: cameraPos,

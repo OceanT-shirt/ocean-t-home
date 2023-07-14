@@ -53,14 +53,13 @@ export const PortfolioBoards = ({portfolios, homePos}: Props) => {
         }
     })
     // TODO カメラ制御を分離する
-    useFrame((state, dt) => {
-        if (match) {
-            console.log("match!")
-            easing.damp3(state.camera.position, homePos, 0.4, dt, 10);
-            easing.dampQ(state.camera.quaternion, q, 0.4, dt, 1);
-        }
-        // console.log(state.camera.position);
-    })
+    // useFrame((state, dt) => {
+    //     if (match) {
+    //         easing.damp3(state.camera.position, homePos, 0.4, dt, 10);
+    //         easing.dampQ(state.camera.quaternion, q, 0.4, dt, 1);
+    //     }
+    //     // console.log(state.camera.position);
+    // })
 
     return (
         <group name={"portfolio_boards"} position={homePos} ref={ref}

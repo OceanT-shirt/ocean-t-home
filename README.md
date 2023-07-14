@@ -15,3 +15,9 @@ I used to developing `homev1` . However, I decided to stop developing it because
 ...and SQL servers are pricy :p
 
 
+# HomeV1
+## Camera Controls
+- Basically handling the location from cameraControl.tsx
+- Managing state of camera in CameraPosProvider.tsx
+
+

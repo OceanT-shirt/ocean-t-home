@@ -3,7 +3,7 @@ import { Effects } from "./effects";
 import { InfoDisplay } from "./infoDisplay";
 import {PortfolioWall} from "./portfolioWall";
 import {Ocean} from "./ocean";
-import { Sky } from "@react-three/drei"
+import { Sky, KeyboardControls } from "@react-three/drei"
 import {WindowFrame} from "./windowFrame";
 import {Button3D} from "./button3D";
 import {Ground} from "./ground";
@@ -35,7 +35,7 @@ export const MainCanvas = () => {
             <Ground pos={[0, 90, 20]} />
             <Ground pos={[0, 110, 20]} />
             {/*<Effects />*/}
-            {/*<CameraControl />*/}
+            <CameraControl />
         </Canvas>
     )
 }
