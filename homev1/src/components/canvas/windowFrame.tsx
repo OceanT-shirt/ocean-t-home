@@ -3,7 +3,7 @@ export const WindowFrame = ({ color, position }: {color: string, position: [numb
             <mesh
                 position={position}
             >
-                <boxGeometry args={[40, 12, 1]} />
+                <boxGeometry args={[1000, 12, 1]} />
                 <meshLambertMaterial color={color} reflectivity={0.5} />
             </mesh>
     )

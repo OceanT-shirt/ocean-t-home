@@ -82,7 +82,7 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
     useCursor(active)
 
     return(
-        <group position={portfolio.pos}>
+        <group position={portfolio.pos} rotation={portfolio.rotation ?? new THREE.Euler(0, 0, 0)}>
             <mesh
                   onPointerOver={(e) => {
                       e.stopPropagation()
@@ -91,10 +91,12 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
                   }}
                   onPointerOut={() => setActive(false)}
                   name={String(portfolio.id)}
+                  scale={[20*4/3, 20, 0.05]}
             >
                 <boxGeometry />
-                <meshLambertMaterial color={active ? "blue" : "pink"} reflectivity={0.5} />
-                {/*<Image ref={image} url={portfolio.imgUri} position={[0, 0, 0.7]} />*/}
+                {/*<meshLambertMaterial color={active ? "blue" : "pink"} reflectivity={0.5} />*/}
+              <meshStandardMaterial color="#151515" metalness={0.5} roughness={0.5} envMapIntensity={2} />
+                <Image ref={image} url={portfolio.imgUri} position={[0, 0, 0.7]} raycast={() => null} />
             </mesh>
         </group>
     )
