@@ -5,6 +5,7 @@ import * as THREE from "three"
 import {useFrame} from "@react-three/fiber";
 import {easing} from "maath";
 import {useLocation, useRoute} from "wouter";
+import { damp3 } from 'maath/easing';
 
 interface PortfolioProps {
     id: number;
@@ -78,6 +79,16 @@ export const PortfolioBoards = ({portfolios, homePos}: Props) => {
 export const PortfolioBoard = (portfolio: Portfolio) => {
     const [active, setActive] = useState<boolean>(false)
     const image = useRef(null)
+  const frameRef = useRef<THREE.Mesh>(null)
+
+  useFrame((state, dt) => {
+    if (frameRef.current) {
+      easing.damp3(frameRef.current.scale, [20*4/3*(active? 0.90 : 1), 20*(active? 0.90 : 1), 0.05], 0.1, dt, 1000)
+    }
+    // image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
+    // easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
+    // easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
+  })
 
     useCursor(active)
 
@@ -92,6 +103,7 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
                   onPointerOut={() => setActive(false)}
                   name={String(portfolio.id)}
                   scale={[20*4/3, 20, 0.05]}
+                  ref={frameRef}
             >
                 <boxGeometry />
                 {/*<meshLambertMaterial color={active ? "blue" : "pink"} reflectivity={0.5} />*/}

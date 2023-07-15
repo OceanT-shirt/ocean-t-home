@@ -7,7 +7,7 @@ import { Sky, KeyboardControls, Environment } from '@react-three/drei';
 import {WindowFrame} from "./windowFrame";
 import {Button3D} from "./button3D";
 import {Ground} from "./ground";
-import {GetPortfolioMock, Portfolio} from "../../models/portfolio";
+import { GetPortfolioMock, GetPortfolioMockReverse, Portfolio } from '../../models/portfolio';
 import {CameraControl} from "./cameraControl";
 import { PortfolioBoards} from "./portfolioBoard";
 import * as THREE from "three"
@@ -15,7 +15,7 @@ import * as THREE from "three"
 
 
 export const MainCanvas = () => {
-    const p: Portfolio[] = [GetPortfolioMock(1), GetPortfolioMock(2), GetPortfolioMock(3)]
+    const p: Portfolio[] = [GetPortfolioMock(1), GetPortfolioMock(2), GetPortfolioMock(3), GetPortfolioMockReverse(1), GetPortfolioMockReverse(2), GetPortfolioMockReverse(3)]
 
 
     return (
@@ -33,7 +33,7 @@ export const MainCanvas = () => {
             {/*<Button3D color={"skyblue"} position={[0, 98, 3]} />*/}
             <PortfolioBoards portfolios={p} homePos={new THREE.Vector3(0, 100, 10)} />
             <Ground pos={[0, 90, 50]} />
-            <Ground pos={[0, 110, 50]} isUpsideDown={true} />
+            <Ground pos={[0, 110, 50]} isTop={true} />
             {/*<Effects />*/}
             <CameraControl />
           {/*<Environment preset="city" />*/}

@@ -1,24 +1,23 @@
 import { MeshReflectorMaterial } from '@react-three/drei';
 import * as THREE from "three"
 
-export const Ground = ({pos, isUpsideDown=false}: {pos: [number, number, number], isUpsideDown?: boolean}) => {
+export const Ground = ({pos, isTop=false}: {pos: [number, number, number], isTop?: boolean}) => {
     return(
-        <mesh position={pos} rotation={new THREE.Euler(!isUpsideDown? -0.5*Math.PI : 0.5*Math.PI, 0, 0)}>
+        <mesh position={pos} rotation={new THREE.Euler(!isTop? -0.5*Math.PI : 0.5*Math.PI, 0, 0)}>
             <planeGeometry args={[1000, 100]} />
-            {/*<meshLambertMaterial color={"black"} reflectivity={0.5} />*/}
-          <MeshReflectorMaterial
+          {isTop ? <meshLambertMaterial color={"black"} reflectivity={0.5} /> :           <MeshReflectorMaterial
             mirror={1}
             blur={[300, 100]}
-            resolution={1024}
+            resolution={512}
             mixBlur={1}
             mixStrength={350}
             roughness={1}
-            depthScale={6}
+            depthScale={1.5}
             minDepthThreshold={0.4}
-            maxDepthThreshold={1.4}
+            maxDepthThreshold={1.8}
             color="#050505"
             metalness={0.5}
-          />
+            />}
         </mesh>
     )
 }
