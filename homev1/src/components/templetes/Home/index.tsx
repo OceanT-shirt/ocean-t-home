@@ -1,6 +1,11 @@
 import { MainCanvas } from "../../canvas";
 import { Footer } from "../../organisms/Footer";
-import { CanvasContainer, HomeContainer } from "./style";
+import {
+  CanvasContainer,
+  HomeContainer,
+  PopupContainer,
+  PopupContent,
+} from "./style";
 import { User } from "../../../models/user";
 
 interface HomeProps {
@@ -13,10 +18,12 @@ export const Home = ({ user, popupId, closePopup }: HomeProps) => {
   return (
     <HomeContainer>
       {popupId && (
-        <div style={{ color: "white" }}>
-          <text>popup {popupId}</text>
-          <button title={"close"} onClick={closePopup} />
-        </div>
+        <PopupContainer>
+          <PopupContent>
+            <h1>popup {popupId}</h1>
+            <button onClick={closePopup}>Close</button>
+          </PopupContent>
+        </PopupContainer>
       )}
       <CanvasContainer>
         <MainCanvas />
