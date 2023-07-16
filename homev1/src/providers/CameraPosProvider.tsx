@@ -1,36 +1,38 @@
-import React, { createContext, ReactNode, useState } from 'react';
-import * as THREE from "three"
-
+import React, { createContext, ReactNode, useState } from "react";
+import * as THREE from "three";
 
 type CameraPosContextType = {
-    cameraPos: THREE.Vector3;
-    setCameraPos: (newCameraPos: THREE.Vector3) => void;
+  cameraPos: THREE.Vector3;
+  setCameraPos: (newCameraPos: THREE.Vector3) => void;
 };
 
-
 export const CameraPosContext = createContext<CameraPosContextType>({
-    cameraPos: new THREE.Vector3(),
-    setCameraPos: (newCameraPos: THREE.Vector3) => {console.log(newCameraPos)},
+  cameraPos: new THREE.Vector3(0, 100, 80),
+  setCameraPos: (newCameraPos: THREE.Vector3) => {
+    console.log(newCameraPos);
+  },
 });
 
-
 interface Props {
-    children: ReactNode
+  children: ReactNode;
 }
 
+export const CameraPosProvider = ({ children }: Props) => {
+  const [cameraPos, setCameraPos] = useState<THREE.Vector3>(
+    new THREE.Vector3(0, 100, 80),
+  );
 
-export const CameraPosProvider = ({children} : Props) => {
-    const [cameraPos, setCameraPos] = useState<THREE.Vector3>(new THREE.Vector3(0, 100, 80))
+  const newContext: CameraPosContextType = {
+    cameraPos: cameraPos,
+    setCameraPos: (newCameraPos) => {
+      setCameraPos(newCameraPos);
+      console.log("Provider: camera pos renewed", cameraPos);
+    },
+  };
 
-    const newContext: CameraPosContextType = {
-        cameraPos: cameraPos,
-        setCameraPos: (newCameraPos) => {
-            setCameraPos(newCameraPos)
-            console.log("Provider: camera pos renewed", cameraPos)
-        },
-    };
-
-    return (
-        <CameraPosContext.Provider value={newContext}>{children}</CameraPosContext.Provider>
-    );
+  return (
+    <CameraPosContext.Provider value={newContext}>
+      {children}
+    </CameraPosContext.Provider>
+  );
 };
