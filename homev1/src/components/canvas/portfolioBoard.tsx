@@ -87,6 +87,7 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
   const [active, setActive] = useState<boolean>(false);
   const imageRef = useRef<THREE.Mesh>(null);
   const boardRef = useRef<THREE.Mesh>(null);
+  const textRef = useRef<THREE.Group>(null);
 
   useFrame((state, dt) => {
     if (imageRef.current) {
@@ -98,6 +99,15 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
         dt,
         1000,
       );
+      if (textRef.current) {
+        easing.damp3(
+          textRef.current.scale,
+          [active ? 0.95 : 1.0, active ? 0.95 : 1.0, 1.0],
+          0.1,
+          dt,
+          1000,
+        );
+      }
     }
     // image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
     // easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
@@ -137,24 +147,27 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
           raycast={() => null}
         />
       </mesh>
-      <Html
-        distanceFactor={20}
-        sprite
-        transform
-        position={[portfolio.isLeft ? 5 : -5, 16, 0]}
-        style={{
-          fontSize: "60px",
-          padding: "10px 18px",
-          width: "300px",
-          height: "100px",
-          color: "white",
-          textAlign: portfolio.isLeft ? "right" : "left",
-        }}
-      >
-        <div className={"font-black text-2xl bg-white"}>
-          <text>{portfolio.title}</text>
-        </div>
-      </Html>
+      <group ref={textRef}>
+        <Html
+          distanceFactor={20}
+          sprite
+          transform
+          position={[portfolio.isLeft ? 5 : -5, 16, 0]}
+          style={{
+            fontSize: "60px",
+            padding: "10px 18px",
+            width: "300px",
+            height: "100px",
+            color: "white",
+            textAlign: portfolio.isLeft ? "right" : "left",
+          }}
+        >
+          <div className={"font-black text-2xl bg-white"}>
+            <text>{portfolio.title}</text>
+          </div>
+        </Html>
+      </group>
+
       {/*<Text maxWidth={5} anchorX="right" anchorY="top-baseline" position={[0, 0, -0.55]} fontSize={5}>*/}
       {/*  {portfolio.title}*/}
       {/*</Text>*/}
