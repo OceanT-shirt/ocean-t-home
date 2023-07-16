@@ -1,11 +1,11 @@
-import {Home} from "../../templetes/Home";
-import {useHome} from "./hooks";
+import { Home } from "../../templetes/Home";
+import { useHome } from "./hooks";
 
 export const HomePage = () => {
-    const { user } = useHome()
-    return (
-        <>
-            <Home user={user} />
-        </>
-    )
-}
+  const { user, popupId, closePopup } = useHome();
+  return (
+    <>
+      <Home user={user} popupId={popupId} closePopup={closePopup} />
+    </>
+  );
+};
