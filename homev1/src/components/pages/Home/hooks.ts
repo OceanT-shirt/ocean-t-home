@@ -36,6 +36,7 @@ export const useHome = () => {
   }, [popupId]);
 
   const closePopup = () => {
+    setMarkdownContent("");
     setLocation("/");
   };
 
