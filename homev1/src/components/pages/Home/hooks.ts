@@ -17,14 +17,19 @@ export const useHome = () => {
       }
       try {
         const response = await fetch(`/articles/${popupId}.md`);
-        if (response.ok) {
+        if (
+          response.ok &&
+          response.headers.get("content-type")?.includes("text/markdown")
+        ) {
           const markdown = await response.text();
           const { body } = fm(markdown);
           setMarkdownContent(body);
+        } else {
+          setMarkdownContent("# NOT FOUND");
         }
       } catch (error) {
         console.error("Failed to fetch markdown:", error);
-        // closePopup();
+        setMarkdownContent("# FETCH ERROR");
       }
     };
     fetchMarkdown();
