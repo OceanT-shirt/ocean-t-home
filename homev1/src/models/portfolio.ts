@@ -11,6 +11,18 @@ export interface Portfolio {
   isLeft: boolean;
 }
 
+export const getErrorPortfolio = (title?: string, desc?: string): Portfolio => {
+  return {
+    id: -1,
+    imgUri: "",
+    title: title ?? "ERROR",
+    desc: desc ?? "ERROR",
+    pos: new THREE.Vector3(),
+    rotation: new THREE.Euler(),
+    isLeft: false,
+  };
+};
+
 export const GetPortfolioMock = (_id: number): Portfolio => {
   const START_ANGLE = Math.PI / 16;
   const SPACE_ANGLE = Math.PI / 16;

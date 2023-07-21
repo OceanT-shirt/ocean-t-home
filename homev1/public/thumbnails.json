@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  },
+  {
+    "id": "2",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  },
+  {
+    "id": "3",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  },
+  {
+    "id": "4",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  },
+  {
+    "id": "5",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  },
+  {
+    "id": "6",
+    "imgUri": "/star_palace.png",
+    "title": "Sample",
+    "desc": "Sample"
+  }
+]

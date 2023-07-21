@@ -2,11 +2,7 @@ import { Canvas, RootState } from "@react-three/fiber";
 import { Ocean } from "./ocean";
 import { Sky } from "@react-three/drei";
 import { WindowFrame } from "./windowFrame";
-import {
-  GetPortfolioMock,
-  GetPortfolioMockReverse,
-  Portfolio,
-} from "../../models/portfolio";
+import { Portfolio } from "../../models/portfolio";
 import { CameraControl } from "./cameraControl";
 import { PortfolioBoards } from "./portfolioBoard";
 import * as THREE from "three";
@@ -14,16 +10,8 @@ import { Ground } from "./ground";
 import { useContext, useState } from "react";
 import { CameraPosContext } from "../../providers/CameraPosProvider";
 
-export const MainCanvas = () => {
+export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const p: Portfolio[] = [
-    GetPortfolioMock(1),
-    GetPortfolioMock(2),
-    GetPortfolioMock(3),
-    GetPortfolioMockReverse(1),
-    GetPortfolioMockReverse(2),
-    GetPortfolioMockReverse(3),
-  ];
   const { cameraPos } = useContext(CameraPosContext);
   const initCamera = new THREE.PerspectiveCamera(80, 1, 1, 2000);
   initCamera.position.add(cameraPos);
@@ -59,7 +47,7 @@ export const MainCanvas = () => {
         />
         {/*<Button3D color={"skyblue"} position={[0, 98, 3]} />*/}
         <PortfolioBoards
-          portfolios={p}
+          portfolios={portfolios}
           homePos={new THREE.Vector3(0, 100, 10)}
         />
         <Ground pos={[0, 90, 50]} />

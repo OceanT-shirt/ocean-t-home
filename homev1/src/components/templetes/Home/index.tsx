@@ -9,12 +9,14 @@ import {
 import { User } from "../../../models/user";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useRef } from "react";
+import { Portfolio } from "../../../models/portfolio";
 
 interface HomeProps {
   user: User;
   popupId?: number;
   closePopup: () => void;
   markdownContent?: string;
+  portfolios: Portfolio[];
 }
 
 export const Home = ({
@@ -22,10 +24,12 @@ export const Home = ({
   popupId,
   closePopup,
   markdownContent,
+  portfolios,
 }: HomeProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log(portfolios);
     const handleOutsideClick = (event: Event) => {
       if (
         containerRef.current &&
@@ -53,7 +57,7 @@ export const Home = ({
         </PopupContainer>
       )}
       <CanvasContainer>
-        <MainCanvas />
+        <MainCanvas portfolios={portfolios} />
       </CanvasContainer>
       <Footer userName={user.userName} userId={user.getUserId()} />
     </HomeContainer>

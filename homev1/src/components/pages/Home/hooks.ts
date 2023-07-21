@@ -2,6 +2,7 @@ import { UserMock } from "../../../models/user";
 import { useLocation, useRoute } from "wouter";
 import { useEffect, useState } from "react";
 import fm from "front-matter";
+import { usePortfolio } from "../../../services/PortfolioLoader";
 
 export const useHome = () => {
   const user = UserMock;
@@ -9,6 +10,7 @@ export const useHome = () => {
   const [popupId, setPopupId] = useState<number | undefined>(undefined);
   const [, setLocation] = useLocation();
   const [markdownContent, setMarkdownContent] = useState("");
+  const { portfolioData } = usePortfolio();
 
   useEffect(() => {
     const fetchMarkdown = async () => {
@@ -48,5 +50,5 @@ export const useHome = () => {
     }
   }, [params?.id]);
 
-  return { user, popupId, closePopup, markdownContent };
+  return { user, popupId, closePopup, markdownContent, portfolioData };
 };
