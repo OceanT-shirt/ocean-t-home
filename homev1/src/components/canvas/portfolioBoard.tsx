@@ -1,18 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Html, Image, useCursor } from "@react-three/drei";
 import { Portfolio } from "../../models/portfolio";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { useLocation, useRoute } from "wouter";
-
-interface PortfolioProps {
-  id: number;
-  imageUri: string;
-  desc: string;
-  pos: [number, number, number];
-  homePos: [number, number, number];
-}
 
 interface Props {
   portfolios: Portfolio[];
@@ -27,39 +19,31 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
   const [, params] = useRoute("/item/:id");
   const [match] = useRoute("/item/");
 
-  useEffect(() => {
-    if (!ref.current) {
-      console.error("ref error: ref.current is null");
-      return;
-    }
-
-    clicked.current = ref.current.getObjectById(Number(params?.id)) || null;
-
-    if (clicked.current != null) {
-      // IDに対応するオブジェクトが存在する時
-      if (clicked.current.parent != null) {
-        // console.log("clicked parent:", clicked.current.parent.id);
-        console.log("Pos:", homePos);
-        clicked.current.parent.updateWorldMatrix(true, true);
-        clicked.current.parent.localToWorld(homePos.set(0, 0.5, 5));
-        clicked.current.parent.getWorldQuaternion(q);
-      } else {
-        console.error("object parent is null");
-      }
-    } else {
-      // IDに対応するオブジェクトが存在しない時：ルート
-      console.log("else:", homePos.set(0, 100, 5));
-      q.identity();
-    }
-  });
-  // TODO カメラ制御を分離する
-  // useFrame((state, dt) => {
-  //     if (match) {
-  //         easing.damp3(state.camera.position, homePos, 0.4, dt, 10);
-  //         easing.dampQ(state.camera.quaternion, q, 0.4, dt, 1);
+  // useEffect(() => {
+  //   if (!ref.current) {
+  //     console.error("ref error: ref.current is null");
+  //     return;
+  //   }
+  //
+  //   clicked.current = ref.current.getObjectById(Number(params?.id)) || null;
+  //
+  //   if (clicked.current != null) {
+  //     // IDに対応するオブジェクトが存在する時
+  //     if (clicked.current.parent != null) {
+  //       // console.log("clicked parent:", clicked.current.parent.id);
+  //       console.log("Pos:", homePos);
+  //       clicked.current.parent.updateWorldMatrix(true, true);
+  //       clicked.current.parent.localToWorld(homePos.set(0, 0.5, 5));
+  //       clicked.current.parent.getWorldQuaternion(q);
+  //     } else {
+  //       console.error("object parent is null");
   //     }
-  //     // console.log(state.camera.position);
-  // })
+  //   } else {
+  //     // IDに対応するオブジェクトが存在しない時：ルート
+  //     console.log("else:", homePos.set(0, 100, 5));
+  //     q.identity();
+  //   }
+  // });
 
   return (
     <group
@@ -154,23 +138,47 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
           transform
           position={[portfolio.isLeft ? 5 : -5, 16, 0]}
           style={{
-            fontSize: "60px",
+            fontSize: "65px",
             padding: "10px 18px",
             width: "300px",
-            height: "100px",
+            height: "140px",
             color: "white",
             textAlign: portfolio.isLeft ? "right" : "left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
           }}
         >
-          <div className={"font-black text-2xl bg-white"}>
+          <div>
             <text>{portfolio.title}</text>
           </div>
         </Html>
       </group>
-
-      {/*<Text maxWidth={5} anchorX="right" anchorY="top-baseline" position={[0, 0, -0.55]} fontSize={5}>*/}
-      {/*  {portfolio.title}*/}
-      {/*</Text>*/}
+      <group>
+        <Html
+          distanceFactor={20}
+          sprite
+          transform
+          position={[portfolio.isLeft ? 5 : -5, -15, 0]}
+          style={{
+            fontSize: "50px",
+            padding: "10px 18px",
+            width: "300px",
+            height: "140px",
+            color: "white",
+            textAlign: portfolio.isLeft ? "right" : "left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            opacity: active ? 1 : 0,
+            transition: "opacity 0.3s ease",
+          }}
+        >
+          <div>
+            <text>{portfolio.desc}</text>
+          </div>
+        </Html>
+      </group>
     </group>
   );
 };
