@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { easing } from "maath";
 import { CameraPosContext } from "../../providers/CameraPosProvider";
 import { useKeyboardControls } from "@react-three/drei";
+import { DebugContext } from "../../providers/DebugProvider";
 
 export const CameraControl = () => {
   // move camera based on the state
@@ -15,6 +16,7 @@ export const CameraControl = () => {
     setInitialized,
   } = useContext(CameraPosContext);
   const [, get] = useKeyboardControls();
+  const { debugCamera } = useContext(DebugContext);
 
   // camera control
   useFrame((state, dt) => {
@@ -48,7 +50,9 @@ export const CameraControl = () => {
       }
       const q = new THREE.Quaternion();
       easing.damp3(state.camera.position, cameraPos, 0.1, dt, 1000);
-      console.log(forward, backward, left, right, jump, cameraPos);
+      if (debugCamera) {
+        console.log(forward, backward, left, right, jump, cameraPos);
+      }
       easing.dampQ(state.camera.quaternion, q, 0.1, dt, 1);
     }
   });

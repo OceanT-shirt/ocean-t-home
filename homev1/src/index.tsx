@@ -1,18 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
-import {CameraPosProvider} from "./providers/CameraPosProvider";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./pages/App";
+import reportWebVitals from "./reportWebVitals";
+import { CameraPosProvider } from "./providers/CameraPosProvider";
+import { DebugProvider } from "./providers/DebugProvider";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-      <CameraPosProvider>
-          <App />
-      </CameraPosProvider>
-  </React.StrictMode>
+    <CameraPosProvider>
+      <DebugProvider>
+        <App />
+      </DebugProvider>
+    </CameraPosProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

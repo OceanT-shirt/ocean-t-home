@@ -36,7 +36,6 @@ export const CameraPosProvider = ({ children }: Props) => {
     cameraPos: cameraPos,
     setCameraPos: (newCameraPos) => {
       setCameraPos(newCameraPos);
-      console.log("Provider: camera pos renewed", cameraPos);
     },
     isInitialized: isInitialized,
     setInitialized: (isInitialized) => {

@@ -1,19 +1,14 @@
 import { MainCanvas } from "../../canvas";
 import { Footer } from "../../organisms/Footer";
-import {
-  CanvasContainer,
-  HomeContainer,
-  PopupContainer,
-  PopupContent,
-} from "./style";
+import { CanvasContainer, HomeContainer } from "./style";
 import { User } from "../../../models/user";
-import ReactMarkdown from "react-markdown";
-import { useEffect, useRef } from "react";
 import { Portfolio } from "../../../models/portfolio";
+import { Popup } from "../../organisms/Popup";
 
 interface HomeProps {
   user: User;
   popupId?: number;
+  isPopupLoading: boolean;
   closePopup: () => void;
   markdownContent?: string;
   portfolios: Portfolio[];
@@ -22,39 +17,19 @@ interface HomeProps {
 export const Home = ({
   user,
   popupId,
+  isPopupLoading,
   closePopup,
   markdownContent,
   portfolios,
 }: HomeProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log(portfolios);
-    const handleOutsideClick = (event: Event) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        closePopup();
-      }
-    };
-
-    document.addEventListener("mousedown", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [closePopup]);
   return (
     <HomeContainer>
       {popupId && (
-        <PopupContainer>
-          <PopupContent ref={containerRef}>
-            <h1>popup {popupId}</h1>
-            <ReactMarkdown>{markdownContent ?? ""}</ReactMarkdown>
-            <button onClick={closePopup}>Close</button>
-          </PopupContent>
-        </PopupContainer>
+        <Popup
+          mdContent={markdownContent ?? ""}
+          isLoading={isPopupLoading}
+          onClosePopup={closePopup}
+        />
       )}
       <CanvasContainer>
         <MainCanvas portfolios={portfolios} />

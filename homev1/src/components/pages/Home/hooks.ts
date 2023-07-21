@@ -11,8 +11,12 @@ export const useHome = () => {
   const [, setLocation] = useLocation();
   const [markdownContent, setMarkdownContent] = useState("");
   const { portfolioData } = usePortfolio();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // TODO - this is a side effect, should be moved to a service
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchMarkdown = async () => {
       if (!popupId) {
         return;
@@ -34,7 +38,9 @@ export const useHome = () => {
         setMarkdownContent("# FETCH ERROR");
       }
     };
-    fetchMarkdown();
+    fetchMarkdown().then(() => {
+      setIsLoading(false);
+    });
   }, [popupId]);
 
   const closePopup = () => {
@@ -50,5 +56,13 @@ export const useHome = () => {
     }
   }, [params?.id]);
 
-  return { user, popupId, closePopup, markdownContent, portfolioData };
+  return {
+    user,
+    popupId,
+    closePopup,
+    markdownContent,
+    portfolioData,
+    isLoading,
+    setIsLoading,
+  };
 };
