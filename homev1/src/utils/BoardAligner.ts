@@ -20,6 +20,6 @@ export const BoardAligner = (
   const z = radius * (1 - Math.cos(centerAngle));
   return {
     position: new THREE.Vector3((isLeft ? -1 : 1) * x, 0, z),
-    rotation: new THREE.Euler(0, (isLeft ? 1 : -1) * START_ANGLE, 0),
+    rotation: new THREE.Euler(0, (isLeft ? 0 : 0) * START_ANGLE, 0),
   };
 };

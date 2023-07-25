@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Html, Image, useCursor } from "@react-three/drei";
 import { Portfolio } from "../../models/portfolio";
 import * as THREE from "three";
@@ -16,8 +16,17 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
   const clicked = useRef<THREE.Object3D | null>(null);
   let q = new THREE.Quaternion();
   const [, setLocation] = useLocation();
-  const [, params] = useRoute("/item/:id");
-  const [match] = useRoute("/item/");
+  const [match, params] = useRoute("/item/:id");
+
+  const [isTextDisplay, setIsTextDisplay] = useState(true);
+
+  useEffect(() => {
+    if (match) {
+      setIsTextDisplay(false);
+    } else {
+      setIsTextDisplay(true);
+    }
+  }, [match]);
 
   // useEffect(() => {
   //   if (!ref.current) {
@@ -61,13 +70,23 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
       }}
     >
       {portfolios.map((p, index) => (
-        <PortfolioBoard key={index} {...p} />
+        <PortfolioBoard
+          key={index}
+          portfolio={p}
+          isTextDisplay={isTextDisplay}
+        />
       ))}
     </group>
   );
 };
 
-export const PortfolioBoard = (portfolio: Portfolio) => {
+export const PortfolioBoard = ({
+  portfolio,
+  isTextDisplay,
+}: {
+  portfolio: Portfolio;
+  isTextDisplay: boolean;
+}) => {
   const [active, setActive] = useState<boolean>(false);
   const imageRef = useRef<THREE.Mesh>(null);
   const boardRef = useRef<THREE.Mesh>(null);
@@ -118,17 +137,13 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
       >
         <boxGeometry />
         {/*<meshLambertMaterial color={active ? "blue" : "pink"} reflectivity={0.5} />*/}
-        <meshStandardMaterial
-          color="#151515"
-          metalness={1.0}
-          roughness={0}
-          envMapIntensity={2}
-        />
+        <meshBasicMaterial color="#151515" />
         <Image
           ref={imageRef}
           url={portfolio.imgUri}
           position={[0, 0, 0.7]}
           raycast={() => null}
+          receiveShadow
         />
       </mesh>
       <group ref={textRef}>
@@ -147,6 +162,8 @@ export const PortfolioBoard = (portfolio: Portfolio) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
+            opacity: isTextDisplay ? 1 : 0,
+            transition: "opacity 0.3s ease",
           }}
         >
           <div>

@@ -50,7 +50,7 @@ export const GetPortfolioMockReverse = (_id: number): Portfolio => {
   const z = radius * (1 - Math.cos(centerAngle));
   return {
     id: _id,
-    imgUri: "/IMG_20221130_120950_205.jpg",
+    imgUri: "/gdsc.jpg",
     title: "Sample Portfolio",
     desc: "This is 3D portfolio created by @ocean_t_shirt",
     pos: new THREE.Vector3(x, 0, z),

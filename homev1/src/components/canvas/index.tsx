@@ -22,11 +22,7 @@ export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
 
   return (
     <>
-      <Canvas
-        dpr={[1, 1.5]}
-        camera={initCamera}
-        onCreated={handleCanvasCreated}
-      >
+      <Canvas dpr={[4, 4]} camera={initCamera} onCreated={handleCanvasCreated}>
         {/*<hemisphereLight color={"#0000ff"} groundColor={"#00ff00"} intensity={0.6} />*/}
         <color attach="background" args={[0xefefef]} />
         <ambientLight intensity={0.02} />

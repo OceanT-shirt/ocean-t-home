@@ -1,38 +1,38 @@
 [
   {
     "id": "1",
-    "imgUri": "/star_palace.png",
-    "title": "AI",
-    "desc": "Sample"
+    "imgUri": "/torchlens.png",
+    "title": "TorchLens",
+    "desc": "Open Source Library for Ray Tracing in PyTorch."
   },
   {
     "id": "2",
     "imgUri": "/star_palace.png",
-    "title": "Blockchain",
-    "desc": "Sample"
+    "title": "Prediction Market",
+    "desc": "Prediction Markets on Astar Blockchain."
   },
   {
     "id": "3",
-    "imgUri": "/star_palace.png",
-    "title": "Optics",
-    "desc": "Sample"
+    "imgUri": "/OPLAND.webp",
+    "title": "OPLAND",
+    "desc": "AI Business Assistant for All Small Businesses"
   },
   {
     "id": "4",
-    "imgUri": "/star_palace.png",
+    "imgUri": "/gdsc.jpg",
     "title": "Google DSC Lead",
-    "desc": "Sample"
+    "desc": "I founded a developer community in my college."
   },
   {
     "id": "5",
-    "imgUri": "/star_palace.png",
-    "title": "Startups",
-    "desc": "Sample"
+    "imgUri": "/MallTomorrow.webp",
+    "title": "MallTomorrow",
+    "desc": "E Commerce Platform on Blockchain."
   },
   {
     "id": "6",
-    "imgUri": "/star_palace.png",
-    "title": "Internships",
-    "desc": "Sample"
+    "imgUri": "/coming_soon_2.png",
+    "title": "Coming Soon",
+    "desc": "I'm currently working on a project which will be released soon. Stay Tuned!"
   }
 ]
