@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import ReactMarkdown from "react-markdown";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
 import { MediaDisplay } from "./MediaDisplay";
 import { Button } from "../atoms/Button";
 import { Glassmorphism } from "../../constants/Color";
+import { Markdown } from "./Markdown";
 
 export const Popup = ({
   mdContent,
@@ -142,7 +142,7 @@ export const Popup = ({
               />
             </MediaDisplayContainer>
             <ArticleContainer>
-              <ReactMarkdown>{mdContent}</ReactMarkdown>
+              <Markdown mdContent={mdContent} />
             </ArticleContainer>
           </PopupContent>
         </PopupContainer>
