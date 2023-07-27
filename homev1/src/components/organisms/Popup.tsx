@@ -3,6 +3,8 @@ import ReactMarkdown from "react-markdown";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
 import { MediaDisplay } from "./MediaDisplay";
+import { Button } from "../atoms/Button";
+import { Glassmorphism } from "../../constants/Color";
 
 export const Popup = ({
   mdContent,
@@ -28,19 +30,19 @@ export const Popup = ({
   `;
 
   const PopupContent = styled.div`
+    ${Glassmorphism};
+    border-radius: 16px;
     width: 80%;
     height: 80%;
-    //padding: 20px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: white;
     display: grid;
     grid-template-columns: 600px 1fr;
     grid-template-rows: 1fr;
+  `;
+
+  const CloseButtonContainer = styled.div`
+    position: absolute;
+    top: -60px;
+    left: 0;
   `;
 
   const MediaDisplayContainer = styled.div`
@@ -53,6 +55,7 @@ export const Popup = ({
 
   const ArticleContainer = styled.div`
     grid-column: 2;
+    padding: 40px;
   `;
 
   const duration = 180;
@@ -121,6 +124,12 @@ export const Popup = ({
           ref={nodeRef}
         >
           <PopupContent ref={containerRef}>
+            <CloseButtonContainer>
+              <Button
+                buttonType={"close"}
+                onClick={onClosePopupWithAnimation}
+              />
+            </CloseButtonContainer>
             <MediaDisplayContainer>
               <MediaDisplay
                 mediaArray={[
@@ -134,7 +143,6 @@ export const Popup = ({
             </MediaDisplayContainer>
             <ArticleContainer>
               <ReactMarkdown>{mdContent}</ReactMarkdown>
-              <button onClick={onClosePopupWithAnimation}>Close</button>
             </ArticleContainer>
           </PopupContent>
         </PopupContainer>
