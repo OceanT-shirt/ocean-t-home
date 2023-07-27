@@ -7,10 +7,13 @@ export const Markdown = ({ mdContent }: { mdContent: string }) => {
     ${TitleFont}
   `;
   const MdSubHeading = styled.h3`
-    ${SubTitleFont}
+    ${SubTitleFont};
+    font-size: 1.8rem;
+    margin: 2.8rem 0;
   `;
   const MdParagraph = styled.p`
-    ${MainFont}
+    ${MainFont};
+    font-size: 1.2rem;
   `;
   return (
     <ReactMarkdown
