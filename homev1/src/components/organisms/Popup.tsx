@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import ReactMarkdown from "react-markdown";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
+import { MediaDisplay } from "./MediaDisplay";
 
 export const Popup = ({
   mdContent,
@@ -29,7 +30,7 @@ export const Popup = ({
   const PopupContent = styled.div`
     width: 80%;
     height: 80%;
-    padding: 20px;
+    //padding: 20px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -37,6 +38,21 @@ export const Popup = ({
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.16);
     color: white;
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    grid-template-rows: 1fr;
+  `;
+
+  const MediaDisplayContainer = styled.div`
+    grid-column: 1;
+    grid-row: 1;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+  `;
+
+  const ArticleContainer = styled.div`
+    grid-column: 2;
   `;
 
   const duration = 180;
@@ -105,8 +121,21 @@ export const Popup = ({
           ref={nodeRef}
         >
           <PopupContent ref={containerRef}>
-            <ReactMarkdown>{mdContent}</ReactMarkdown>
-            <button onClick={onClosePopupWithAnimation}>Close</button>
+            <MediaDisplayContainer>
+              <MediaDisplay
+                mediaArray={[
+                  {
+                    alt: "alt",
+                    url: "https://www.youtube.com/watch?v=1q8XmZdLqNU",
+                    type: "video",
+                  },
+                ]}
+              />
+            </MediaDisplayContainer>
+            <ArticleContainer>
+              <ReactMarkdown>{mdContent}</ReactMarkdown>
+              <button onClick={onClosePopupWithAnimation}>Close</button>
+            </ArticleContainer>
           </PopupContent>
         </PopupContainer>
       )}
