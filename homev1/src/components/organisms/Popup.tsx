@@ -5,6 +5,7 @@ import { MediaDisplay } from "./MediaDisplay";
 import { Button } from "../atoms/Button";
 import { Glassmorphism } from "../../constants/Color";
 import { Markdown } from "./Markdown";
+import { FaGithub } from "react-icons/fa";
 
 export const Popup = ({
   mdContent,
@@ -36,7 +37,7 @@ export const Popup = ({
     height: 80%;
     display: grid;
     grid-template-columns: 600px 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 80px;
   `;
 
   const CloseButtonContainer = styled.div`
@@ -47,7 +48,7 @@ export const Popup = ({
 
   const MediaDisplayContainer = styled.div`
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 1/3;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
@@ -55,7 +56,19 @@ export const Popup = ({
 
   const ArticleContainer = styled.div`
     grid-column: 2;
+    grid-row: 1;
     padding: 40px;
+  `;
+
+  const BottomContainer = styled.div`
+    grid-column: 2;
+    grid-row: 2;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   `;
 
   const duration = 180;
@@ -144,6 +157,13 @@ export const Popup = ({
             <ArticleContainer>
               <Markdown mdContent={mdContent} />
             </ArticleContainer>
+            <BottomContainer>
+              <Button
+                buttonType={"link"}
+                title={"GitHub"}
+                ReactIcon={FaGithub}
+              />
+            </BottomContainer>
           </PopupContent>
         </PopupContainer>
       )}
