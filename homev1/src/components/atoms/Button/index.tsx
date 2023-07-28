@@ -72,7 +72,7 @@ const LinkButton = ({
   `;
 
   return (
-    <LinkButtonWrapper>
+    <LinkButtonWrapper {...props}>
       <ReactIcon color={"white"} size={28} />
       <ButtonTitle>{title}</ButtonTitle>
     </LinkButtonWrapper>

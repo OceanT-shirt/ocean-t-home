@@ -2,14 +2,8 @@ import { Home } from "../../templetes/Home";
 import { useHome } from "./hooks";
 
 export const HomePage = () => {
-  const {
-    user,
-    popupId,
-    closePopup,
-    isLoading,
-    markdownContent,
-    portfolioData,
-  } = useHome();
+  const { user, popupId, closePopup, isLoading, markdownFile, portfolioData } =
+    useHome();
   return (
     <>
       <Home
@@ -17,7 +11,7 @@ export const HomePage = () => {
         popupId={popupId}
         isPopupLoading={isLoading}
         closePopup={closePopup}
-        markdownContent={markdownContent}
+        markdownFile={markdownFile}
         portfolios={portfolioData}
       />
     </>

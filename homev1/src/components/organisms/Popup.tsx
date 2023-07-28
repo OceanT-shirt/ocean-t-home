@@ -5,14 +5,15 @@ import { MediaDisplay } from "./MediaDisplay";
 import { Button } from "../atoms/Button";
 import { Glassmorphism } from "../../constants/Color";
 import { Markdown } from "./Markdown";
-import { FaGithub } from "react-icons/fa";
+import { FaExternalLinkSquareAlt, FaGithub } from "react-icons/fa";
+import { MarkdownFile } from "../../models/markdown";
 
 export const Popup = ({
-  mdContent,
+  markdownFile,
   isLoading,
   onClosePopup,
 }: {
-  mdContent: string;
+  markdownFile: MarkdownFile | undefined;
   isLoading: boolean;
   onClosePopup: () => void;
 }) => {
@@ -67,8 +68,9 @@ export const Popup = ({
     padding-left: 40px;
     padding-bottom: 30px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    column-gap: 20px;
+    justify-content: flex-start;
   `;
 
   const duration = 180;
@@ -145,24 +147,51 @@ export const Popup = ({
             </CloseButtonContainer>
             <MediaDisplayContainer>
               <MediaDisplay
-                mediaArray={[
-                  {
-                    alt: "alt",
-                    url: "https://www.youtube.com/watch?v=1q8XmZdLqNU",
-                    type: "video",
-                  },
-                ]}
+                mediaArray={
+                  markdownFile?.attributes?.images
+                    ? markdownFile?.attributes?.images.map((image) => ({
+                        alt: image.alt,
+                        url: image.href,
+                        type: "img",
+                      }))
+                    : []
+                }
               />
             </MediaDisplayContainer>
             <ArticleContainer>
-              <Markdown mdContent={mdContent} />
+              <Markdown mdContent={markdownFile?.body ?? ""} />
             </ArticleContainer>
             <BottomContainer>
-              <Button
-                buttonType={"link"}
-                title={"GitHub"}
-                ReactIcon={FaGithub}
-              />
+              {markdownFile?.attributes?.url &&
+                markdownFile?.attributes?.url.map((url) => {
+                  if (url.title === "GitHub") {
+                    return (
+                      <Button
+                        key={url.title}
+                        buttonType={"link"}
+                        title={url.title}
+                        ReactIcon={FaGithub}
+                        onClick={() => {
+                          console.log(url.url);
+                          window.open(url.url, "_blank");
+                        }}
+                      />
+                    );
+                  } else {
+                    return (
+                      <Button
+                        key={url.title}
+                        buttonType={"link"}
+                        title={url.title}
+                        ReactIcon={FaExternalLinkSquareAlt}
+                        onClick={() => {
+                          console.log(url.url);
+                          window.open(url.url, "_blank");
+                        }}
+                      />
+                    );
+                  }
+                })}
             </BottomContainer>
           </PopupContent>
         </PopupContainer>

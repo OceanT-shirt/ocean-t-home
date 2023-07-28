@@ -12,13 +12,25 @@ const swiper = new Swiper(".swiper", {
   modules: [Navigation],
 });
 
-export const MediaDisplay = ({
-  mediaArray,
-}: {
-  mediaArray?: { alt: string; url: string; type: "img" | "video" }[];
-}) => {
+interface MediaArray {
+  alt: string;
+  url: string;
+  type: "img" | "video";
+}
+
+export const MediaDisplay = ({ mediaArray }: { mediaArray?: MediaArray[] }) => {
   // TODO: add video player
   // TODO: add onclick
+  if (!mediaArray || mediaArray.length === 0) {
+    mediaArray = [
+      {
+        alt: "no image",
+        url: "/coming_soon_2.png",
+        type: "img",
+      } as MediaArray,
+    ];
+  }
+
   return (
     <swiper-container
       style={{
@@ -28,7 +40,7 @@ export const MediaDisplay = ({
       {mediaArray &&
         mediaArray.map((m) => {
           return (
-            <swiper-slide key={mediaArray.indexOf(m)}>
+            <swiper-slide key={m.alt + m.url}>
               <div
                 style={{
                   paddingTop: "56.25%",
@@ -44,12 +56,15 @@ export const MediaDisplay = ({
                       objectFit: "cover",
                       width: "100%",
                       height: "100%",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
                     }}
                   />
                 ) : (
                   <img
                     src={"/coming_soon_2.png"}
-                    alt={"no image"}
+                    alt={"loading error"}
                     style={{
                       objectFit: "cover",
                       width: "100%",
