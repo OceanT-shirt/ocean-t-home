@@ -146,17 +146,19 @@ export const Popup = ({
               />
             </CloseButtonContainer>
             <MediaDisplayContainer>
-              <MediaDisplay
-                mediaArray={
-                  markdownFile?.attributes?.images
-                    ? markdownFile?.attributes?.images.map((image) => ({
-                        alt: image.alt,
-                        url: image.href,
-                        type: "img",
-                      }))
-                    : []
-                }
-              />
+              {isReady && !isLoading && (
+                <MediaDisplay
+                  mediaArray={
+                    markdownFile?.attributes?.images
+                      ? markdownFile?.attributes?.images.map((image) => ({
+                          alt: image.alt,
+                          url: image.href,
+                          type: "img",
+                        }))
+                      : []
+                  }
+                />
+              )}
             </MediaDisplayContainer>
             <ArticleContainer>
               <Markdown mdContent={markdownFile?.body ?? ""} />
