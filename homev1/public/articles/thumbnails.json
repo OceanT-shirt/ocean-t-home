@@ -1,13 +1,13 @@
 [
   {
     "id": "1",
-    "imgUri": "/torchlens.png",
+    "imgUri": "/images/torchlens.png",
     "title": "TorchLens",
     "desc": "Open Source Library for Ray Tracing in PyTorch."
   },
   {
     "id": "2",
-    "imgUri": "/star_palace.png",
+    "imgUri": "/images/star_palace.png",
     "title": "Prediction Market",
     "desc": "Prediction Markets on Astar Blockchain."
   },
@@ -19,19 +19,19 @@
   },
   {
     "id": "4",
-    "imgUri": "/gdsc.jpg",
+    "imgUri": "/images/gdsc.jpg",
     "title": "Google DSC Lead",
     "desc": "I founded a developer community in my college."
   },
   {
     "id": "5",
-    "imgUri": "/MallTomorrow.webp",
+    "imgUri": "/images/MallTomorrow.webp",
     "title": "MallTomorrow",
     "desc": "E Commerce Platform on Blockchain."
   },
   {
     "id": "6",
-    "imgUri": "/coming_soon_2.png",
+    "imgUri": "/images/coming_soon_2.png",
     "title": "Coming Soon",
     "desc": "I'm currently working on a project which will be released soon. Stay Tuned!"
   }

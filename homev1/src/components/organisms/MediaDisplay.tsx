@@ -26,7 +26,7 @@ export const MediaDisplay = ({ mediaArray }: { mediaArray?: MediaArray[] }) => {
     mediaArray = [
       {
         alt: "no image",
-        url: "/coming_soon_2.png",
+        url: "/images/coming_soon_2.png",
         type: "img",
       } as MediaArray,
     ];
@@ -94,7 +94,7 @@ export const MediaDisplay = ({ mediaArray }: { mediaArray?: MediaArray[] }) => {
                     />
                   ) : (
                     <img
-                      src={"/coming_soon_2.png"}
+                      src={"/images/coming_soon_2.png"}
                       alt={"loading error"}
                       style={{
                         objectFit: "cover",
@@ -153,7 +153,7 @@ export const MediaDisplay = ({ mediaArray }: { mediaArray?: MediaArray[] }) => {
                     />
                   ) : (
                     <img
-                      src={"/coming_soon_2.png"}
+                      src={"/images/coming_soon_2.png"}
                       alt={"loading error"}
                       style={{
                         objectFit: "cover",

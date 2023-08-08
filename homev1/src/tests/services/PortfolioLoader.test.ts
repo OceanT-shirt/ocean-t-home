@@ -64,11 +64,11 @@ describe("fetchThumbnails", () => {
     });
     global.fetch = mockFetch;
 
-    const result = await fetchThumbnails("/thumbnails.json");
+    const result = await fetchThumbnails("/articles/thumbnails.json");
 
     expect(result).toEqual([{ id: 1, title: "Thumbnail 1" }]);
     expect(mockFetch).toHaveBeenCalledTimes(1);
-    expect(mockFetch).toHaveBeenCalledWith("/thumbnails.json");
+    expect(mockFetch).toHaveBeenCalledWith("/articles/thumbnails.json");
   });
 
   it("should throw an error when the fetch fails", async () => {
@@ -77,11 +77,11 @@ describe("fetchThumbnails", () => {
     });
     global.fetch = mockFetch;
 
-    await expect(fetchThumbnails("/thumbnails.json")).rejects.toThrow(
+    await expect(fetchThumbnails("/articles/thumbnails.json")).rejects.toThrow(
       "Failed to fetch thumbnails.",
     );
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
-    expect(mockFetch).toHaveBeenCalledWith("/thumbnails.json");
+    expect(mockFetch).toHaveBeenCalledWith("/articles/thumbnails.json");
   });
 });

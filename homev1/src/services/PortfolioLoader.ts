@@ -50,7 +50,7 @@ export const portfolioConverter = (thumbnail: Thumbnail[]): Portfolio[] => {
 
 export const usePortfolio = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { data, error } = useSWR("/thumbnails.json", fetchThumbnails);
+  const { data, error } = useSWR("/articles/thumbnails.json", fetchThumbnails);
 
   const portfolioData: Portfolio[] = portfolioConverter(data || []);
 
