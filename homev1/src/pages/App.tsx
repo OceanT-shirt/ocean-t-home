@@ -5,7 +5,7 @@ import { HomePage } from "../components/pages/Home";
 import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
 
 const PageContainer = styled.div`
-  ${tw`flex-grow flex flex-col bg-black`}
+  ${tw`flex-grow flex flex-col bg-black w-full h-full overflow-hidden`}
 `;
 
 enum Controls {
