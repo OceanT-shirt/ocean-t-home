@@ -1,5 +1,5 @@
-import { useFrame } from "@react-three/fiber";
-import { useContext } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useContext, useEffect } from "react";
 import * as THREE from "three";
 import { easing } from "maath";
 import { CameraPosContext } from "../../providers/CameraPosProvider";
@@ -17,6 +17,18 @@ export const CameraControl = () => {
   } = useContext(CameraPosContext);
   const [, get] = useKeyboardControls();
   const { debugCamera } = useContext(DebugContext);
+  const { size, camera } = useThree();
+
+  const computeFOV = (windowWidth: number) => {
+    return 2 * Math.atan(1200 / windowWidth) * (180 / Math.PI);
+  };
+
+  useEffect(() => {
+    if (camera instanceof THREE.PerspectiveCamera) {
+      camera.fov = Math.max(10, Math.min(170, computeFOV(size.width)));
+      camera.updateProjectionMatrix();
+    }
+  }, [camera, size]);
 
   // camera control
   useFrame((state, dt) => {
