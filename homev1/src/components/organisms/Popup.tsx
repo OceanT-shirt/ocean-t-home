@@ -93,7 +93,7 @@ export const Popup = ({
   const [isReady, setIsReady] = useState(false);
 
   const onClosePopupWithAnimation = useCallback(() => {
-    setIsReady(false);
+    // setIsReady(false);
     setTimeout(() => {
       onClosePopup();
     }, duration + 10);
@@ -174,7 +174,6 @@ export const Popup = ({
                         title={url.title}
                         ReactIcon={FaGithub}
                         onClick={() => {
-                          console.log(url.url);
                           window.open(url.url, "_blank");
                         }}
                       />
@@ -187,7 +186,6 @@ export const Popup = ({
                         title={url.title}
                         ReactIcon={FaExternalLinkSquareAlt}
                         onClick={() => {
-                          console.log(url.url);
                           window.open(url.url, "_blank");
                         }}
                       />
