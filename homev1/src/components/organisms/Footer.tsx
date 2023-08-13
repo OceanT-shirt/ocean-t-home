@@ -35,7 +35,7 @@ export const Footer = ({ userName, userId }: FooterProps) => {
           ReactIcon={FaX}
           title={"x"}
           onClick={() => {
-            window.open("https://twitter.com/ocean_t_shirt", "_blank");
+            window.open(process.env.X_URL ?? "https://x.com", "_blank");
           }}
         />
         <Button
@@ -44,7 +44,7 @@ export const Footer = ({ userName, userId }: FooterProps) => {
           title={"linkedin"}
           onClick={() => {
             window.open(
-              "https://www.linkedin.com/in/haruka-takahira-ba85181a6",
+              process.env.LINKEDIN_URL ?? "https://linkedin.com",
               "_blank",
             );
           }}
@@ -54,7 +54,10 @@ export const Footer = ({ userName, userId }: FooterProps) => {
           ReactIcon={FaGithub}
           title={"github"}
           onClick={() => {
-            window.open("https://github.com/OceanT-shirt", "_blank");
+            window.open(
+              process.env.GITHUB_URL ?? "https://github.com",
+              "_blank",
+            );
           }}
         />
       </IconWrapper>
