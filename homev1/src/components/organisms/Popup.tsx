@@ -7,6 +7,7 @@ import { Glassmorphism } from "../../constants/Color";
 import { Markdown } from "./Markdown";
 import { FaExternalLinkSquareAlt, FaGithub } from "react-icons/fa";
 import { MarkdownFile } from "../../models/markdown";
+import { useMediaQuery } from "react-responsive";
 
 export const Popup = ({
   markdownFile,
@@ -17,6 +18,10 @@ export const Popup = ({
   isLoading: boolean;
   onClosePopup: () => void;
 }) => {
+  const mediaMaxWidth: number = 1024;
+  const isTabletOrMobile = useMediaQuery({
+    query: `(max-width: ${mediaMaxWidth}px)`,
+  });
   const nodeRef = useRef<HTMLDivElement>(null);
   const PopupContainer = styled.div`
     position: fixed;
@@ -29,6 +34,10 @@ export const Popup = ({
     align-items: center;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 9999;
+    @media (max-width: ${mediaMaxWidth}px) {
+      margin-top: 10px;
+      height: auto;
+    }
   `;
 
   const PopupContent = styled.div`
@@ -37,8 +46,15 @@ export const Popup = ({
     width: 80%;
     height: 80%;
     display: grid;
-    grid-template-columns: 600px 1fr;
+    grid-template-columns: min(600px, 50%) 1fr;
     grid-template-rows: 1fr 80px;
+    @media (max-width: ${mediaMaxWidth}px) {
+      padding-top: 20px;
+      grid-template-columns: 100%;
+      grid-template-rows: auto 1fr 80px;
+      grid-auto-rows: min-content;
+      width: 95%;
+    }
   `;
 
   const CloseButtonContainer = styled.div`
@@ -53,12 +69,21 @@ export const Popup = ({
     background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
+    @media (max-width: ${mediaMaxWidth}px) {
+      grid-column: 1;
+      grid-row: 1;
+    }
   `;
 
   const ArticleContainer = styled.div`
     grid-column: 2;
     grid-row: 1;
     padding: 40px;
+    @media (max-width: ${mediaMaxWidth}px) {
+      grid-column: 1;
+      grid-row: 2;
+      padding: 15px;
+    }
   `;
 
   const BottomContainer = styled.div`
@@ -71,6 +96,13 @@ export const Popup = ({
     flex-direction: row;
     column-gap: 20px;
     justify-content: flex-start;
+    @media (max-width: ${mediaMaxWidth}px) {
+      grid-column: 1;
+      grid-row: 3;
+      padding-right: 10px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+    }
   `;
 
   const duration = 180;
@@ -140,10 +172,12 @@ export const Popup = ({
         >
           <PopupContent ref={containerRef}>
             <CloseButtonContainer>
-              <Button
-                buttonType={"close"}
-                onClick={onClosePopupWithAnimation}
-              />
+              {!isTabletOrMobile && (
+                <Button
+                  buttonType={"close"}
+                  onClick={onClosePopupWithAnimation}
+                />
+              )}
             </CloseButtonContainer>
             <MediaDisplayContainer>
               {isReady && !isLoading && (

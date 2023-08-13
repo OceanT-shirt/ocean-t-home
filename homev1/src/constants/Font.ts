@@ -34,18 +34,27 @@ export const TitleFont = css`
   ${DefaultFont};
   font-size: 2.5rem;
   font-weight: 500;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 export const SubTitleFont = css`
   ${DefaultFont};
   font-size: 2rem;
   font-weight: 500;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const MainFont = css`
   ${DefaultFont};
   font-size: 1.5rem;
   font-weight: 300;
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 `;
 
 // eslint-disable-next-line
