@@ -20,7 +20,7 @@ export const DebugProvider = ({ children }: Props) => {
   const newContext: DebugContextType = {
     debugAll: false,
     debugCamera: false,
-    canvasLite: true,
+    canvasLite: false,
   };
   // TODO add logic to change debugAll and debugCamera
 

@@ -25,8 +25,11 @@ export const CameraControl = () => {
 
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.fov = Math.max(10, Math.min(170, computeFOV(size.width)));
-      camera.updateProjectionMatrix();
+      const newFov = Math.max(10, Math.min(170, computeFOV(size.width)));
+      if (newFov !== camera.fov) {
+        camera.fov = newFov;
+        camera.updateProjectionMatrix();
+      }
     }
   }, [camera, size]);
 
