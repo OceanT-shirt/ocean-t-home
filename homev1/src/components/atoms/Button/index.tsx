@@ -79,8 +79,38 @@ const LinkButton = ({
   );
 };
 
+const IconButton = ({
+  ReactIcon,
+  title,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  ReactIcon: IconType;
+  title: string;
+}) => {
+  const IconButtonWrapper = styled.button`
+    padding: 6px 6px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.3s ease;
+    width: auto;
+    background: transparent;
+    appearance: none;
+    border: none;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  `;
+
+  return (
+    <IconButtonWrapper {...props}>
+      <ReactIcon size={28} />
+    </IconButtonWrapper>
+  );
+};
+
 type ButtonProps = {
-  buttonType: "close" | "link";
+  buttonType: "close" | "link" | "icon";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 type CloseButtonProps = ButtonProps & {
@@ -88,7 +118,7 @@ type CloseButtonProps = ButtonProps & {
 };
 
 type LinkButtonProps = ButtonProps & {
-  buttonType: "link";
+  buttonType: "link" | "icon";
   ReactIcon: IconType;
   title: string;
 };
@@ -98,6 +128,8 @@ export const Button = (props: CloseButtonProps | LinkButtonProps) => {
     return <CloseButton {...props} />;
   } else if (props.buttonType === "link") {
     return <LinkButton {...props} />;
+  } else if (props.buttonType === "icon") {
+    return <IconButton {...props} />;
   } else {
     return <></>;
   }
