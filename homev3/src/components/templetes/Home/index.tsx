@@ -34,11 +34,6 @@ export const Home = ({
       )}
       <CanvasContainer>
         <MainCanvas portfolios={portfolios} />
-        {/*<Canvas dpr={[3, 3]}>*/}
-        {/*  <mesh>*/}
-        {/*    <boxBufferGeometry args={[1, 1, 1]} />*/}
-        {/*  </mesh>*/}
-        {/*</Canvas>*/}
       </CanvasContainer>
       <Footer userName={user.userName} userId={user.getUserId()} />
     </HomeContainer>
