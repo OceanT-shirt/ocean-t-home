@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "imgUri": "/images/torchlens.png",
+    "title": "TorchLens",
+    "desc": "Open Source Library for Ray Tracing in PyTorch."
+  },
+  {
+    "id": "2",
+    "imgUri": "/images/star_palace.png",
+    "title": "Prediction Market",
+    "desc": "Prediction Markets on Astar Blockchain."
+  },
+  {
+    "id": "3",
+    "imgUri": "/images/OPLAND.webp",
+    "title": "OPLAND",
+    "desc": "AI Business Assistant for All Small Businesses"
+  },
+  {
+    "id": "4",
+    "imgUri": "/images/gdsc.jpg",
+    "title": "Google DSC Lead",
+    "desc": "I founded a developer community in my college."
+  },
+  {
+    "id": "5",
+    "imgUri": "/images/MallTomorrow.webp",
+    "title": "MallTomorrow",
+    "desc": "E Commerce Platform on Blockchain."
+  },
+  {
+    "id": "6",
+    "imgUri": "/images/coming_soon_2.png",
+    "title": "Coming Soon",
+    "desc": "I'm currently working on a project which will be released soon. Stay Tuned!"
+  }
+]

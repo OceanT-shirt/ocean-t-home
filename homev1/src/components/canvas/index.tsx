@@ -12,7 +12,7 @@ import { CameraPosContext } from "../../providers/CameraPosProvider";
 import { DebugContext } from "../../providers/DebugProvider";
 
 export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const { cameraPos } = useContext(CameraPosContext);
   const { canvasLite } = useContext(DebugContext);
   const initCamera = new THREE.PerspectiveCamera(80, 1, 1, 2000);
