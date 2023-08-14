@@ -6,7 +6,7 @@ export const HomeContainer = styled.div`
   max-width: 90rem;
   display: flex;
   flex-direction: column;
-  margin: auto 0;
+  margin: 0 auto;
 `;
 
 export const CanvasContainer = styled.div`

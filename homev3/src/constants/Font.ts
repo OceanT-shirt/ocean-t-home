@@ -33,4 +33,8 @@ export const MainFont = css`
 
 export const DecorateFont = css`
   font-family: "Babylonica", serif;
+  font-size: 3.5rem;
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
