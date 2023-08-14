@@ -1,15 +1,15 @@
 import { Canvas } from "@react-three/fiber";
 import { Portfolio } from "../../models/portfolio";
-import * as THREE from "three";
 import { useContext, useState } from "react";
 import { CameraPosContext } from "../../providers/CameraPosProvider";
 import { DebugContext } from "../../providers/DebugProvider";
 import { WindowFrame } from "./windowFrame";
-import { Ocean } from "./ocean";
-import { Sky } from "@react-three/drei";
 import { Ground } from "./ground";
 import { PortfolioBoards } from "./portfolioBoard";
 import { CameraControl } from "./cameraControl";
+import { Ocean } from "./ocean";
+import * as THREE from "three";
+import { Sky } from "@react-three/drei";
 
 export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
   const [, setIsLoading] = useState(true);
@@ -27,7 +27,7 @@ export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
       <Canvas dpr={[3, 3]} camera={initCamera} onCreated={handleCanvasCreated}>
         {!canvasLite && (
           <>
-            <color attach="background" args={[0xefefef]} />
+            <color attach="background" args={[0, 0, 0]} />
             <ambientLight intensity={0.02} />
             <directionalLight intensity={0.5} position={[-10, 100, 10]} />
             <WindowFrame color={"gray"} position={[0, 89, 0]} />
@@ -35,10 +35,10 @@ export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
             <Ocean />
             <Sky
               rayleigh={6}
-              turbidity={6}
-              distance={3000}
+              turbidity={16}
+              distance={5000}
               mieDirectionalG={0.8}
-              mieCoefficient={0.005}
+              mieCoefficient={0.003}
               inclination={0.49}
               azimuth={0.25}
             />

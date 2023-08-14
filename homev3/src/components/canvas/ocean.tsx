@@ -8,22 +8,23 @@ extend({ Water });
 
 export function Ocean() {
   const ref = useRef();
-  // const gl = useThree((state) => state.gl)
+  // const gl = useThree((state) => state.gl);
   const waterNormals = useLoader(THREE.TextureLoader, "/waternormals.jpeg");
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
-  const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), []);
+  const geom = useMemo(() => new THREE.PlaneGeometry(5000, 5000), []);
 
   const config = useMemo(
     () => ({
-      textureWidth: 512,
-      textureHeight: 512,
+      textureWidth: 128,
+      textureHeight: 128,
       waterNormals,
       sunDirection: new THREE.Vector3(),
       sunColor: 0xffffff,
       waterColor: 0x001e0f,
-      distortionScale: 3.7,
+      distortionScale: 8.0,
       fog: false,
-      // format: gl.encoding
+      size: 10,
+      // format: gl.encoding,
     }),
     [waterNormals],
   );
