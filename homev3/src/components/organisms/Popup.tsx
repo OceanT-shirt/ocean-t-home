@@ -79,6 +79,8 @@ export const Popup = ({
     grid-column: 2;
     grid-row: 1;
     padding: 40px;
+    max-height: calc(100% - 80px);
+    overflow: auto;
     @media (max-width: ${mediaMaxWidth}px) {
       grid-column: 1;
       grid-row: 2;
