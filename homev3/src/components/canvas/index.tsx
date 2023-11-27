@@ -7,7 +7,6 @@ import { WindowFrame } from "./windowFrame";
 import { Ground } from "./ground";
 import { PortfolioBoards } from "./portfolioBoard";
 import { CameraControl } from "./cameraControl";
-import { Ocean } from "./ocean";
 import * as THREE from "three";
 import { Sky } from "@react-three/drei";
 
@@ -32,7 +31,7 @@ export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
             <directionalLight intensity={0.5} position={[-10, 100, 10]} />
             <WindowFrame color={"gray"} position={[0, 89, 0]} />
             <WindowFrame color={"gray"} position={[0, 110, 0]} />
-            <Ocean />
+            {/*<Ocean />*/}
             <Sky
               rayleigh={6}
               turbidity={16}
