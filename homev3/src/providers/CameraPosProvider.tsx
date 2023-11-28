@@ -11,8 +11,10 @@ type CameraPosContextType = {
   startCameraPos: THREE.Vector3;
 };
 
+// TODO 廃止する (現状のカメラ管理を再確認した上で) & ステート管理をrecoilに移行する
 export const CameraPosContext = createContext<CameraPosContextType>({
-  cameraPos: new THREE.Vector3(0, 100, -30),
+  // cameraPos: new THREE.Vector3(0, 100, -30),
+  cameraPos: new THREE.Vector3(0, 100, 80),
   setCameraPos: (newCameraPos: THREE.Vector3) => {
     console.log(newCameraPos);
   },
@@ -33,7 +35,7 @@ interface Props {
 
 export const CameraPosProvider = ({ children }: Props) => {
   const [cameraPos, setCameraPos] = useState<THREE.Vector3>(
-    new THREE.Vector3(0, 100, -30),
+    new THREE.Vector3(0, 100, 80),
   );
   // const [cameraFOV, setCameraFOV] = useState<number>(80);
   const [isInitialized, setInititialize] = useState(false);

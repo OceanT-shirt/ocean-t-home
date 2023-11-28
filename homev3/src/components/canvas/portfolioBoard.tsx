@@ -11,13 +11,46 @@ interface Props {
   homePos: THREE.Vector3;
 }
 
+const ANIMATION_DURATION_SEC = 0.25;
+const ANIMATION_DURATION_MSEC = ANIMATION_DURATION_SEC * 1000;
+
+const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
+  const [isShowArray, setIsShowArray] = useState<boolean[]>(
+    Array(portfolios.length).fill(false),
+  );
+  // タイマーで使用するインデックスを管理するステート
+  const [timerIndex, setTimerIndex] = useState<number>(0);
+
+  // ページを開いた時のアニメーションを実装している
+  useEffect(() => {
+    const halfLength = Math.ceil(portfolios.length / 2);
+    const timer = setInterval(() => {
+      // 新しい配列を作成し、指定されたインデックスの要素をtrueに更新
+      const newArray = [...isShowArray];
+      newArray[halfLength - timerIndex - 1] = true;
+      newArray[portfolios.length - timerIndex - 1] = true;
+      setIsShowArray(newArray);
+      // 次のインデックスに更新
+      setTimerIndex((prevIndex) => prevIndex + 1);
+    }, ANIMATION_DURATION_MSEC);
+
+    if (timerIndex >= halfLength + 1) {
+      clearInterval(timer);
+    }
+
+    return () => clearInterval(timer);
+  }, [timerIndex, isShowArray, portfolios.length]);
+
+  return { isShowArray };
+};
+
 export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
   const ref = useRef<THREE.Group>(null);
   const clicked = useRef<THREE.Object3D | null>(null);
   const [, setLocation] = useLocation();
   const [match] = useRoute("/item/:id");
-
   const [isTextDisplay, setIsTextDisplay] = useState(true);
+  const { isShowArray } = usePortfolioBoard({ portfolios });
 
   useEffect(() => {
     if (match) {
@@ -26,32 +59,6 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
       setIsTextDisplay(true);
     }
   }, [match]);
-
-  // useEffect(() => {
-  //   if (!ref.current) {
-  //     console.error("ref error: ref.current is null");
-  //     return;
-  //   }
-  //
-  //   clicked.current = ref.current.getObjectById(Number(params?.id)) || null;
-  //
-  //   if (clicked.current != null) {
-  //     // IDに対応するオブジェクトが存在する時
-  //     if (clicked.current.parent != null) {
-  //       // console.log("clicked parent:", clicked.current.parent.id);
-  //       console.log("Pos:", homePos);
-  //       clicked.current.parent.updateWorldMatrix(true, true);
-  //       clicked.current.parent.localToWorld(homePos.set(0, 0.5, 5));
-  //       clicked.current.parent.getWorldQuaternion(q);
-  //     } else {
-  //       console.error("object parent is null");
-  //     }
-  //   } else {
-  //     // IDに対応するオブジェクトが存在しない時：ルート
-  //     console.log("else:", homePos.set(0, 100, 5));
-  //     q.identity();
-  //   }
-  // });
 
   return (
     <group
@@ -73,6 +80,7 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
           key={index}
           portfolio={p}
           isTextDisplay={isTextDisplay}
+          isShow={isShowArray[index] ? isShowArray[index] : false}
         />
       ))}
     </group>
@@ -82,14 +90,41 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
 export const PortfolioBoard = ({
   portfolio,
   isTextDisplay,
+  isShow,
 }: {
   portfolio: Portfolio;
   isTextDisplay: boolean;
+  isShow: boolean;
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const imageRef = useRef<THREE.Mesh>(null);
   const boardRef = useRef<THREE.Mesh>(null);
   const textRef = useRef<THREE.Group>(null);
+  // イージングアニメーション
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const duration = ANIMATION_DURATION_SEC;
+  const [startAnimation, setStartAnimation] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  useEffect(() => {
+    if (isShow) {
+      setStartAnimation(true);
+    }
+  }, [isShow]);
+
+  // イージング関数（例：線形イージング）
+  const easeInQuad = (t: number) => t * t;
+
+  useFrame((_, delta) => {
+    if (startAnimation && imageRef.current) {
+      const newElapsedTime = elapsedTime + delta;
+      if (newElapsedTime < duration) {
+        setElapsedTime(newElapsedTime);
+        const easedProgress = easeInQuad(newElapsedTime / duration);
+        setOpacity(easedProgress);
+      }
+    }
+  });
 
   useFrame((_, dt) => {
     if (imageRef.current) {
@@ -111,9 +146,6 @@ export const PortfolioBoard = ({
         );
       }
     }
-    // image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-    // easing.damp3(image.current.scale, [0.85 * (!isActive && hovered ? 0.85 : 1), 0.9 * (!isActive && hovered ? 0.905 : 1), 1], 0.1, dt)
-    // easing.dampC(frame.current.material.color, hovered ? 'orange' : 'white', 0.1, dt)
   });
 
   useCursor(active);
@@ -143,6 +175,8 @@ export const PortfolioBoard = ({
           position={[0, 0, 0.7]}
           raycast={() => null}
           receiveShadow
+          opacity={opacity}
+          transparent={true}
         />
       </mesh>
       <group ref={textRef}>
@@ -161,7 +195,7 @@ export const PortfolioBoard = ({
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
-            opacity: isTextDisplay ? 1 : 0,
+            opacity: isTextDisplay ? opacity : 0,
             transition: "opacity 0.3s ease",
           }}
         >
@@ -186,7 +220,7 @@ export const PortfolioBoard = ({
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            opacity: active ? 1 : 0,
+            opacity: active ? opacity : 0,
             transition: "opacity 0.3s ease",
           }}
         >
