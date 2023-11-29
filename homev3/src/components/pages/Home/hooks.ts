@@ -1,16 +1,15 @@
 import { UserMock } from "../../../models/user";
 import { useLocation, useRoute } from "wouter";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePortfolio } from "../../../services/PortfolioLoader";
 import { MarkdownFile } from "../../../models/markdown";
 import { convertMarkdown } from "../../../services/MarkdownFileLoader";
 import { useAnimation } from "../../../hooks/useAnimation.ts";
 import {
-  animationsAtom,
+  animationHandlerAtom,
   getIsAnimationReady,
 } from "../../../recoil/animation.ts";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { AnimationStatus } from "../../../models/animation.ts";
 
 export const useHome = () => {
   const user = UserMock;
@@ -18,7 +17,7 @@ export const useHome = () => {
   const [popupId, setPopupId] = useState<number | undefined>(undefined);
   const [, setLocation] = useLocation();
   const { animateDAG } = useAnimation();
-  const setAnimations = useSetRecoilState(animationsAtom);
+  const setAnimationHandler = useSetRecoilState(animationHandlerAtom);
   const isAnimationReady = useRecoilValue(getIsAnimationReady);
   // Markdown Contents
 
@@ -92,29 +91,30 @@ export const useHome = () => {
 
   // アニメーション管理
   const [isOpening, setIsOpening] = useState(false);
+  const [isAnimationTriggered, setIsAnimationTriggered] = useState(false);
+
+  const openingAnimationHandler = useCallback(async () => {
+    setIsOpening(true);
+    // TODO setTimeoutのタイマーがクリーンアップされない
+    setTimeout(() => {
+      setIsOpening(false);
+    }, 1000);
+  }, [setIsOpening]);
 
   useEffect(() => {
-    const openingAnimationHandler = async () => {
-      setIsOpening(true);
-      setTimeout(() => {
-        setIsOpening(false);
-      }, 1000);
-    };
-    setAnimations((prev) => ({
+    setAnimationHandler((prev) => ({
       ...prev,
-      opening: {
-        status: AnimationStatus.Idle,
-        handler: openingAnimationHandler,
-      },
+      opening: openingAnimationHandler,
     }));
-  }, [setAnimations]);
+  }, [setAnimationHandler, openingAnimationHandler]);
 
   useEffect(() => {
-    if (!isAnimationReady) return;
+    if (!isAnimationReady || isAnimationTriggered) return;
     animateDAG().catch((error) => {
       console.error("Error executing animation DAG:", error);
     });
-  }, [animateDAG, isAnimationReady]);
+    setIsAnimationTriggered(true);
+  }, [animateDAG, isAnimationReady, isAnimationTriggered]);
 
   return {
     user,

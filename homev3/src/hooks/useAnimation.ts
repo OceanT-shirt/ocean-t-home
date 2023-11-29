@@ -1,6 +1,10 @@
-import { useRecoilState } from "recoil";
-import { animationsAtom } from "../recoil/animation.ts";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AnimationKey, AnimationStatus } from "../models/animation.ts";
+import { useCallback } from "react";
+import {
+  animationHandlerAtom,
+  animationStatusAtom,
+} from "../recoil/animation.ts";
 
 type AnimationDAGNode = {
   next: AnimationKey;
@@ -21,51 +25,62 @@ const DAG: AnimationDAG = {
 };
 
 export const useAnimation = () => {
-  const [animations, setAnimations] = useRecoilState(animationsAtom);
-  const executeAnimation = async (animationName: AnimationKey) => {
-    try {
-      setAnimations({
-        ...animations,
-        [animationName]: AnimationStatus.Running,
-      });
-      const handler = animations[animationName].handler;
-      if (!handler) {
-        setAnimations({
-          ...animations,
-          [animationName]: AnimationStatus.Skipped,
-        });
-      } else {
-        await handler();
-        setAnimations({
-          ...animations,
-          [animationName]: AnimationStatus.Completed,
-        });
+  const animationHandlers = useRecoilValue(animationHandlerAtom);
+  const setAnimationState = useSetRecoilState(animationStatusAtom);
+  const executeAnimation = useCallback(
+    async (animationName: AnimationKey) => {
+      try {
+        setAnimationState((currentAnimations) => ({
+          ...currentAnimations,
+          [animationName]: AnimationStatus.Running,
+        }));
+        const handler = animationHandlers[animationName];
+        if (!handler) {
+          setAnimationState((currentAnimations) => ({
+            ...currentAnimations,
+            [animationName]: AnimationStatus.Skipped,
+          }));
+        } else {
+          await handler();
+          setAnimationState((currentAnimations) => ({
+            ...currentAnimations,
+            [animationName]: AnimationStatus.Completed,
+          }));
+        }
+      } catch (error) {
+        console.error(`Error executing ${animationName}:`, error);
+        setAnimationState((currentAnimations) => ({
+          ...currentAnimations,
+          [animationName]: AnimationStatus.Failed,
+        }));
       }
-    } catch (error) {
-      console.error(`Error executing ${animationName}:`, error);
-      setAnimations({ ...animations, [animationName]: AnimationStatus.Failed });
-    }
-  };
+    },
+    [setAnimationState, animationHandlers],
+  );
 
-  async function animateDAG(
-    dag: AnimationDAG = DAG,
-    currentNode: AnimationKey | "start" | "end" = "start",
-  ) {
-    if (currentNode === "end") return;
+  const animateDAG = useCallback(
+    async (
+      dag: AnimationDAG = DAG,
+      currentNode: AnimationKey | "start" | "end" = "start",
+    ) => {
+      if (currentNode === "end") return;
 
-    const nodes = dag[currentNode];
-    if (nodes === "end") return;
+      const nodes = dag[currentNode];
+      if (nodes === "end") return;
 
-    for (const node of nodes) {
-      await executeAnimation(node.next);
-      if (node.intervalMS > 0) {
-        await new Promise((resolve) => setTimeout(resolve, node.intervalMS));
-      } else if (node.intervalMS < 0) {
-        throw new Error("intervalMS must be positive value or zero");
+      for (const node of nodes) {
+        console.log(`Executing ${currentNode} -> ${node.next}`);
+        await executeAnimation(node.next);
+        if (node.intervalMS > 0) {
+          await new Promise((resolve) => setTimeout(resolve, node.intervalMS));
+        } else if (node.intervalMS < 0) {
+          throw new Error("intervalMS must be positive value or zero");
+        }
+        await animateDAG(dag, node.next);
       }
-      await animateDAG(dag, node.next);
-    }
-  }
+    },
+    [executeAnimation],
+  );
 
   return {
     animateDAG,

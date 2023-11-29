@@ -6,8 +6,7 @@ import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { useLocation, useRoute } from "wouter";
 import { useSetRecoilState } from "recoil";
-import { animationsAtom } from "../../recoil/animation.ts";
-import { AnimationStatus } from "../../models/animation.ts";
+import { animationHandlerAtom } from "../../recoil/animation.ts";
 
 interface Props {
   portfolios: Portfolio[];
@@ -18,7 +17,7 @@ const ANIMATION_DURATION_SEC = 0.25;
 const ANIMATION_DURATION_MSEC = ANIMATION_DURATION_SEC * 1000;
 
 const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
-  const setAnimations = useSetRecoilState(animationsAtom);
+  const setAnimationHandler = useSetRecoilState(animationHandlerAtom);
   const [isShowArray, setIsShowArray] = useState<boolean[]>(
     Array(portfolios.length).fill(false),
   );
@@ -44,14 +43,11 @@ const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
   }, [portfolios.length, timerIndex, isShowArray]);
 
   useEffect(() => {
-    setAnimations((prev) => ({
+    setAnimationHandler((prev) => ({
       ...prev,
-      portfolioLighting: {
-        status: AnimationStatus.Idle,
-        handler: triggerLighting,
-      },
+      portfolioLighting: triggerLighting,
     }));
-  }, [setAnimations, triggerLighting]);
+  }, [setAnimationHandler, triggerLighting]);
 
   return { isShowArray };
 };
@@ -122,7 +118,6 @@ export const PortfolioBoard = ({
     }
   }, [isShow]);
 
-  // イージング関数（例：線形イージング）
   const easeInQuad = (t: number) => t * t;
 
   useFrame((_, delta) => {
