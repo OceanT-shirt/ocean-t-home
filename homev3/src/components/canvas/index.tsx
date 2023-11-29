@@ -8,7 +8,7 @@ import { Ground } from "./ground";
 import { PortfolioBoards } from "./portfolioBoard";
 import { CameraControl } from "./cameraControl";
 import * as THREE from "three";
-import { Sky } from "@react-three/drei";
+import { AnimatedSky } from "./sky.tsx";
 
 export const MainCanvas = ({
   portfolios,
@@ -39,15 +39,7 @@ export const MainCanvas = ({
             <WindowFrame color={"gray"} position={[0, 89, 0]} />
             <WindowFrame color={"gray"} position={[0, 110, 0]} />
             {/*<Ocean />*/}
-            <Sky
-              rayleigh={6}
-              turbidity={16}
-              distance={5000}
-              mieDirectionalG={0.8}
-              mieCoefficient={0.003}
-              inclination={0.49}
-              azimuth={0.25}
-            />
+            <AnimatedSky />
             <Ground pos={[0, 90, 50]} />
             <Ground pos={[0, 110, 50]} isTop={true} />
           </>
