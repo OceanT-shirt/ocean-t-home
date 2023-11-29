@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Html, Image, useCursor } from "@react-three/drei";
 import { Portfolio } from "../../models/portfolio";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { useLocation, useRoute } from "wouter";
+import { useSetRecoilState } from "recoil";
+import { animationsAtom } from "../../recoil/animation.ts";
+import { AnimationStatus } from "../../models/animation.ts";
 
 interface Props {
   portfolios: Portfolio[];
@@ -15,6 +18,7 @@ const ANIMATION_DURATION_SEC = 0.25;
 const ANIMATION_DURATION_MSEC = ANIMATION_DURATION_SEC * 1000;
 
 const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
+  const setAnimations = useSetRecoilState(animationsAtom);
   const [isShowArray, setIsShowArray] = useState<boolean[]>(
     Array(portfolios.length).fill(false),
   );
@@ -22,7 +26,7 @@ const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
   const [timerIndex, setTimerIndex] = useState<number>(0);
 
   // ページを開いた時のアニメーションを実装している
-  useEffect(() => {
+  const triggerLighting = useCallback(async () => {
     const halfLength = Math.ceil(portfolios.length / 2);
     const timer = setInterval(() => {
       // 新しい配列を作成し、指定されたインデックスの要素をtrueに更新
@@ -37,9 +41,17 @@ const usePortfolioBoard = ({ portfolios }: { portfolios: Portfolio[] }) => {
     if (timerIndex >= halfLength + 1) {
       clearInterval(timer);
     }
+  }, [portfolios.length, timerIndex, isShowArray]);
 
-    return () => clearInterval(timer);
-  }, [timerIndex, isShowArray, portfolios.length]);
+  useEffect(() => {
+    setAnimations((prev) => ({
+      ...prev,
+      portfolioLighting: {
+        status: AnimationStatus.Idle,
+        handler: triggerLighting,
+      },
+    }));
+  }, [setAnimations, triggerLighting]);
 
   return { isShowArray };
 };
