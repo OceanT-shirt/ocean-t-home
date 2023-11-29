@@ -68,8 +68,6 @@ export const PortfolioBoards = ({ portfolios, homePos }: Props) => {
       onPointerMissed={() => setLocation("/")}
       onClick={(e) => {
         e.stopPropagation();
-        console.log("clicked object id:", e.object.id);
-        console.log("clicked object:", e.object);
         setLocation(
           clicked.current === e.object ? "/" : "/item/" + e.object.name,
         );

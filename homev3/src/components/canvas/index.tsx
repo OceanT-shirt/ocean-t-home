@@ -10,7 +10,13 @@ import { CameraControl } from "./cameraControl";
 import * as THREE from "three";
 import { Sky } from "@react-three/drei";
 
-export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
+export const MainCanvas = ({
+  portfolios,
+  onCanvasLoaded,
+}: {
+  portfolios: Portfolio[];
+  onCanvasLoaded?: () => void;
+}) => {
   const [, setIsLoading] = useState(true);
   const { cameraPos } = useContext(CameraPosContext);
   const { canvasLite } = useContext(DebugContext);
@@ -19,6 +25,7 @@ export const MainCanvas = ({ portfolios }: { portfolios: Portfolio[] }) => {
   const handleCanvasCreated = () => {
     // Canvasが読み込み完了した後に実行される処理
     setIsLoading(false);
+    onCanvasLoaded && onCanvasLoaded();
   };
 
   return (
